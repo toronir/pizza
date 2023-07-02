@@ -27,7 +27,14 @@
     justify-content: flex-end;
     gap: 1rem;
   }
+  .invalid label {
+    color: #ca3e51;
+  }
   
+  .invalid input {
+    border-color: #aa0b20;
+    background-color: #ffeff1;
+  }
   .actions button {
     font: inherit;
     color: #5a1a01;
