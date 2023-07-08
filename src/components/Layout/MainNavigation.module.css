@@ -1,0 +1,24 @@
+.ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+li{
+    padding-right: 10px;
+}
+
+.active{
+    text-decoration: underline;
+}
+
+.signuOut-btn{
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.25rem 2rem;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    background-color: #8a2b06;
+    margin-left: 15px;
+}

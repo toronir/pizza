@@ -1,30 +1,31 @@
-import { useState } from "react";
+import React from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import Header from "./components/Layout/Header";
-import Meals from "./components/Meals/Meals";
-import Cart from "./components/Cart/Cart";
-import CartProvider from "./store/CartProvider";
+import RootLayout from "./Pages/RootLayout";
+import ErrorPage from "./Pages/ErrorPage";
+import HomePage from "./Pages/HomePage"; 
+import MyAccountPage from "./Pages/MyAccountPage"; 
+import AuthenticationPage from "./Pages/AuthenticationPage";
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "authentication", element: <AuthenticationPage /> },
+      { path: "my-account", element: <MyAccountPage /> },
+    ],
+}
+]);
 
 function App() {
-  const [cartIsShown, setCartIsShown] = useState(false);
-
-  const showCartHandler = () => {
-    setCartIsShown(true);
-  };
-
-  const hideCartHandler = () => {
-    setCartIsShown(false);
-  };
-
-  return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <main>
-        <Meals />
-      </main>
-    </CartProvider>
-  );
+ return(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+ )
 }
 
 export default App;
