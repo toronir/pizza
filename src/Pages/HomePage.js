@@ -7,7 +7,6 @@ function HomePage() {
       <>
           <div className={classes["main-image"]}>
           <img
-            className="h-full w-[110%] object-cover"
             src={mealseImg}
             alt="Table with food"
           />
