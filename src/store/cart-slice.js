@@ -3,11 +3,80 @@ import { createSlice } from "@reduxjs/toolkit";
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    value: 0,
+    items: [],
+    totalQuantity: 0,
+    totalPrice: 0,
+    isChange: false,
   },
-  reducers: {},
+  reducers: {
+    setCartState(state, actions) {
+      const data = actions.payload;
+      state.items = actions.payload.item;
+      state.totalQuantity = actions.payload.totalQuantity;
+      state.totalPrice = actions.payload.totalPrice;
+    },
+    addItemCart(state, actions) {
+      const addedItem = actions.payload;
+      const extraItem = state.items.find(
+        (item) => item.itemId === addedItem.id
+      );
+      state.totalQuantity += addedItem.quantity;
+      state.totalPrice =
+        state.totalPrice + addedItem.quantity * addedItem.price;
+      state.isChange = true;
+      if (!extraItem) {
+        state.items.push({
+          itemId: addedItem.id,
+          name: addedItem.name,
+          price: addedItem.price,
+          quantity: addedItem.quantity,
+        });
+      } else {
+        extraItem.quantity += addedItem.quantity;
+      }
+    },
+    removeItemFromCart(state, actions) {
+      const id = actions.payload;
+      const existingItem = state.items.find((item) => item.itemId === id);
+      state.totalQuantity--;
+      state.totalPrice = state.totalPrice - existingItem.price;
+      state.isChange = true;
+      if (existingItem.quantity <= 1) {
+        state.items = state.items.filter((item) => item.itemId !== id);
+      } else {
+        existingItem.quantity--;
+      }
+    },
+  },
 });
-
-//export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const sendCartData = (cart) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            items: cart.items,
+            totalQuantity: cart.totalQuantity,
+            totalPrice: cart.totalPrice > 0.01 ? cart.totalPrice : 0,
+          }),
+        }
+      );
+      console.log("sendet");
+      console.log(cart);
+      if (!response.ok) {
+        throw new Error("Fail");
+      }
+    };
+    try {
+      await sendRequest();
+    } catch (error) {
+      console.log("fuck");
+    }
+  };
+};
+export const { addItemCart, removeItemFromCart, setCartState } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

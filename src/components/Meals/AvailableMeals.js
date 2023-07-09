@@ -2,11 +2,13 @@ import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
 import Card from "../UI/Card";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const [reqError, setReqError] = useState(false);
+  const mealsState = useSelector((state) => state.meals.products);
   useEffect(() => {
     const waitForMeals = async () => {
       const response = await fetch(
@@ -26,7 +28,6 @@ const AvailableMeals = () => {
           price: responseData[key].price,
         });
       }
-
       setMeals(fetchMeals);
       setisLoading(false);
     };
@@ -47,7 +48,7 @@ const AvailableMeals = () => {
     );
   }
 
-  const mealsList = meals.map((meal) => (
+  const mealsList = mealsState.map((meal) => (
     <MealItem
       key={meal.id}
       id={meal.id}

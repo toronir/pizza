@@ -3,8 +3,10 @@ import { useContext } from "react";
 import CartIcon from "../Cart/CartIcon";
 import CartContext from "../../store/cart-context";
 import classes from "./HeaderCartButton.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeaderCartButton = (props) => {
+  const quantity = useSelector((state) => state.cart.totalQuantity);
   const cartCtx = useContext(CartContext);
 
   const numberOfCartItems = cartCtx.items.reduce((curNumber, item) => {
@@ -17,7 +19,7 @@ const HeaderCartButton = (props) => {
         <CartIcon />
       </span>
       <span>Your Cart</span>
-      <span className={classes.badge}>{numberOfCartItems}</span>
+      <span className={classes.badge}>{quantity}</span>
     </button>
   );
 };

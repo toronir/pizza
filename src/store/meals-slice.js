@@ -3,11 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const mealsSlice = createSlice({
   name: "meals",
   initialState: {
-    value: 0,
+    products: [],
   },
-  reducers: {},
+  reducers: {
+    setMealsState(state, actions) {
+      state.products = actions.payload;
+    },
+  },
 });
 
-//export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { setMealsState } = mealsSlice.actions;
 
 export default mealsSlice.reducer;

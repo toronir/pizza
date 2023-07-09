@@ -5,34 +5,29 @@ import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import CartContext from "../../store/cart-context";
 import Checkout from "./Checkout";
+import { useSelector } from "react-redux";
 
 const Cart = (props) => {
+  const cartItemsState = useSelector((state) => state.cart.items);
+  const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
+
   const [isCheckout, setIsCheckout] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const totalAmount = `$${cartTotalPrice.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
   const orderHandler = () => {
     setIsCheckout(true);
   };
-  const cartItemRemoveHandler = (id) => {
-    cartCtx.removeItem(id);
-  };
-
-  const cartItemAddHandler = (item) => {
-    cartCtx.addItem({ ...item, amount: 1 });
-  };
 
   const cartItems = (
     <ul className={classes["cart-items"]}>
-      {cartCtx.items.map((item) => (
+      {cartItemsState.map((item) => (
         <CartItem
-          key={item.id}
+          id={item.itemId}
           name={item.name}
-          amount={item.amount}
+          amount={item.quantity}
           price={item.price}
-          onRemove={cartItemRemoveHandler.bind(null, item.id)}
-          onAdd={cartItemAddHandler.bind(null, item)}
         />
       ))}
     </ul>
