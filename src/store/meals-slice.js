@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const mealsSlice = createSlice({
-  name: "meals",
+  name: 'meals',
   initialState: {
     products: [],
   },
   reducers: {
     setMealsState(state, actions) {
+      // eslint-disable-next-line no-param-reassign
       state.products = actions.payload;
     },
   },

@@ -1,26 +1,29 @@
-import React, { useEffect } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
-import RootLayout from "./Pages/RootLayout";
-import ErrorPage from "./Pages/ErrorPage";
-import HomePage from "./Pages/HomePage";
-import MyAccountPage from "./Pages/MyAccountPage";
-import AuthenticationPage from "./Pages/AuthenticationPage";
-import { getMealsData } from "./store/meals-actions";
-import { useDispatch, useSelector } from "react-redux";
-import { sendCartData } from "./store/cart-slice";
-import { getCartData } from "./store/cart-actions";
+import RootLayout from './Pages/RootLayout';
+import ErrorPage from './Pages/ErrorPage';
+import HomePage from './Pages/HomePage';
+import MyAccountPage from './Pages/MyAccountPage';
+import AuthenticationPage from './Pages/AuthenticationPage';
+import getMealsData from './store/meals-actions';
+import { sendCartData } from './store/cart-slice';
+import getCartData from './store/cart-actions';
+import GlobalStyle from './theme/GlobalStyle';
+import theme from './theme/mainTheme';
 
 let isInitial = true;
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "authentication", element: <AuthenticationPage /> },
-      { path: "my-account", element: <MyAccountPage /> },
+      { path: 'authentication', element: <AuthenticationPage /> },
+      { path: 'my-account', element: <MyAccountPage /> },
     ],
   },
 ]);
@@ -28,7 +31,6 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   useEffect(() => {
     dispatch(getMealsData());
     dispatch(getCartData());
@@ -45,7 +47,10 @@ function App() {
 
   return (
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <GlobalStyle />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </React.StrictMode>
   );
 }

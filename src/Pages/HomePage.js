@@ -1,19 +1,13 @@
-import Meals from "../components/Meals/Meals";
-import mealseImg from "../assets/meals.jpg";
-import classes from "./HomePage.module.css";
+import Meals from '../components/Meals/Meals';
+import Slider from '../components/Slider/Slider';
 
-function HomePage() {  
-    return (
-      <>
-          <div className={classes["main-image"]}>
-          <img
-            src={mealseImg}
-            alt="Table with food"
-          />
-        </div>
-          <Meals />
-      </>
-    );
+function HomePage() {
+  return (
+    <>
+      <Slider />
+      <Meals />
+    </>
+  );
 }
 
 export default HomePage;

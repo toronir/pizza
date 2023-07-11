@@ -1,7 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: {
     items: [],
     totalQuantity: 0,
@@ -10,19 +12,15 @@ export const cartSlice = createSlice({
   },
   reducers: {
     setCartState(state, actions) {
-      const data = actions.payload;
       state.items = actions.payload.item;
       state.totalQuantity = actions.payload.totalQuantity;
       state.totalPrice = actions.payload.totalPrice;
     },
     addItemCart(state, actions) {
       const addedItem = actions.payload;
-      const extraItem = state.items.find(
-        (item) => item.itemId === addedItem.id
-      );
+      const extraItem = state.items.find((item) => item.itemId === addedItem.id);
       state.totalQuantity += addedItem.quantity;
-      state.totalPrice =
-        state.totalPrice + addedItem.quantity * addedItem.price;
+      state.totalPrice += addedItem.quantity * addedItem.price;
       state.isChange = true;
       if (!extraItem) {
         state.items.push({
@@ -39,7 +37,7 @@ export const cartSlice = createSlice({
       const id = actions.payload;
       const existingItem = state.items.find((item) => item.itemId === id);
       state.totalQuantity--;
-      state.totalPrice = state.totalPrice - existingItem.price;
+      state.totalPrice -= existingItem.price;
       state.isChange = true;
       if (existingItem.quantity <= 1) {
         state.items = state.items.filter((item) => item.itemId !== id);
@@ -50,33 +48,30 @@ export const cartSlice = createSlice({
   },
 });
 export const sendCartData = (cart) => {
-  return async (dispatch) => {
+  return async () => {
     const sendRequest = async () => {
       const response = await fetch(
-        "https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
+        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/cart.json',
         {
-          method: "PUT",
+          method: 'PUT',
           body: JSON.stringify({
             items: cart.items,
             totalQuantity: cart.totalQuantity,
             totalPrice: cart.totalPrice > 0.01 ? cart.totalPrice : 0,
           }),
-        }
+        },
       );
-      console.log("sendet");
-      console.log(cart);
       if (!response.ok) {
-        throw new Error("Fail");
+        throw new Error('Fail');
       }
     };
     try {
       await sendRequest();
     } catch (error) {
-      console.log("fuck");
+      console.log(error);
     }
   };
 };
-export const { addItemCart, removeItemFromCart, setCartState } =
-  cartSlice.actions;
+export const { addItemCart, removeItemFromCart, setCartState } = cartSlice.actions;
 
 export default cartSlice.reducer;

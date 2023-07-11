@@ -9,7 +9,15 @@
   "rules": {
     "linebreak-style": ["error", "windows"],
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/button-has-type": 0,
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "html": "ignore"
+      }
+    ],
+    "react/prop-types": 0
   },
   "settings": {
     "import/resolver": {

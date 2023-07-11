@@ -1,40 +1,38 @@
-import { useDispatch } from "react-redux";
-import classes from "./CartItem.module.css";
-import { cartSlice } from "../../store/cart-slice";
+import { useDispatch } from 'react-redux';
+import { cartSlice } from '../../store/cart-slice';
 
-const CartItem = (props) => {
+function CartItem({ id, name, price, key, amount }) {
   const dispatch = useDispatch();
   const addItemHandler = () => {
     dispatch(
       cartSlice.actions.addItemCart({
-        id: props.id,
-        name: props.name,
+        id,
+        name,
         quantity: 1,
-        price: props.price,
-      })
+        price,
+      }),
     );
   };
   const removeItemHandler = () => {
-    dispatch(cartSlice.actions.removeItemFromCart(props.id));
+    dispatch(cartSlice.actions.removeItemFromCart(id));
   };
-  const price = `$${props.price.toFixed(2)}`;
-  const key = props.key;
+  const priceFormatted = `${price.toFixed(2)}`;
 
   return (
-    <li key={key} className={classes["cart-item"]}>
+    <li key={key}>
       <div>
-        <h2>{props.name}</h2>
-        <div className={classes.summary}>
-          <span className={classes.price}>{price}</span>
-          <span className={classes.amount}>x {props.amount}</span>
+        <h2>{name}</h2>
+        <div>
+          <span>{priceFormatted}</span>
+          <span>x {amount}</span>
         </div>
       </div>
-      <div className={classes.actions}>
+      <div>
         <button onClick={removeItemHandler}>−</button>
         <button onClick={addItemHandler}>+</button>
       </div>
     </li>
   );
-};
+}
 
 export default CartItem;

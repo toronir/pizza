@@ -1,14 +1,18 @@
-import HeaderCartButton from "./HeaderCartButton";
-import classes from "./Header.module.css";
-import MainNavigation from "./MainNavigation";
+import styled from 'styled-components';
+import HeaderCartButton from './HeaderCartButton';
+import MainNavigation from './MainNavigation';
 
-const Header = (props) => {
+const MainHeader = styled.header`
+  background-color: white;
+`;
+
+function Header({ onShowCart }) {
   return (
-      <header className={classes.header}>
-        <MainNavigation />
-        <HeaderCartButton onClick={props.onShowCart} />
-      </header>
+    <MainHeader>
+      <MainNavigation />
+      <HeaderCartButton onClick={onShowCart} />
+    </MainHeader>
   );
-};
+}
 
 export default Header;

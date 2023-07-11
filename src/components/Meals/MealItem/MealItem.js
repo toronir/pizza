@@ -1,39 +1,34 @@
-import { useContext } from "react";
+import { useDispatch } from 'react-redux';
+import MealItemForm from './MealItemForm';
+import { cartSlice } from '../../../store/cart-slice';
 
-import MealItemForm from "./MealItemForm";
-import classes from "./MealItem.module.css";
-import CartContext from "../../../store/cart-context";
-import { useDispatch } from "react-redux";
-import { cartSlice } from "../../../store/cart-slice";
-
-const MealItem = (props) => {
+function MealItem({ id, name, description, price }) {
   const dispatch = useDispatch();
   const addToCartHandler = (quantity) => {
     dispatch(
       cartSlice.actions.addItemCart({
-        id: props.id,
-        name: props.name,
-        quantity: quantity,
-        price: props.price,
-      })
+        id,
+        name,
+        quantity,
+        price,
+      }),
     );
   };
-  const cartCtx = useContext(CartContext);
 
-  const price = `$${props.price.toFixed(2)}`;
+  const priceFormatted = `${price.toFixed(2)}`;
 
   return (
-    <li className={classes.meal}>
+    <li>
       <div>
-        <h3>{props.name}</h3>
-        <div className={classes.description}>{props.description}</div>
-        <div className={classes.price}>{price}</div>
+        <h3>{name}</h3>
+        <div>{description}</div>
+        <div>{priceFormatted}</div>
       </div>
       <div>
-        <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
+        <MealItemForm id={id} onAddToCart={addToCartHandler} />
       </div>
     </li>
   );
-};
+}
 
 export default MealItem;

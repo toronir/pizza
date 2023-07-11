@@ -1,32 +1,34 @@
-import MealItem from "./MealItem/MealItem";
-import classes from "./AvailableMeals.module.css";
-import Card from "../UI/Card";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import MealItem from './MealItem/MealItem';
+import Card from '../UI/Card';
 
-const AvailableMeals = () => {
-  const [meals, setMeals] = useState([]);
+function AvailableMeals() {
+  const setMeals = useState([])[1];
   const [isLoading, setisLoading] = useState(true);
   const [reqError, setReqError] = useState(false);
   const mealsState = useSelector((state) => state.meals.products);
   useEffect(() => {
     const waitForMeals = async () => {
       const response = await fetch(
-        "https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
+        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
       );
       if (!response.ok) {
-        throw new Error("Error");
+        throw new Error('Error');
       }
       const responseData = await response.json();
       const fetchMeals = [];
 
+      // eslint-disable-next-line no-restricted-syntax
       for (const key in responseData) {
-        fetchMeals.push({
-          id: key,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price,
-        });
+        if (Object.hasOwn(responseData, key)) {
+          fetchMeals.push({
+            id: key,
+            name: responseData[key].name,
+            description: responseData[key].description,
+            price: responseData[key].price,
+          });
+        }
       }
       setMeals(fetchMeals);
       setisLoading(false);
@@ -38,11 +40,11 @@ const AvailableMeals = () => {
     });
   }, []);
   if (isLoading) {
-    return <section className={classes.mealsLoading}>LOADING....</section>;
+    return <section>LOADING....</section>;
   }
   if (reqError) {
     return (
-      <section className={classes.mealsError}>
+      <section>
         <p>{reqError}</p>
       </section>
     );
@@ -59,12 +61,12 @@ const AvailableMeals = () => {
   ));
 
   return (
-    <section className={classes.meals}>
+    <section>
       <Card>
         <ul>{mealsList}</ul>
       </Card>
     </section>
   );
-};
+}
 
 export default AvailableMeals;

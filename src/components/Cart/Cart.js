@@ -1,61 +1,49 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 
-import Modal from "../UI/Modal";
-import CartItem from "./CartItem";
-import classes from "./Cart.module.css";
-import CartContext from "../../store/cart-context";
-import Checkout from "./Checkout";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import Modal from '../UI/Modal';
+import CartItem from './CartItem';
+import CartContext from '../../store/cart-context';
+import Checkout from './Checkout';
 
-const Cart = (props) => {
+function Cart({ onClose }) {
   const cartItemsState = useSelector((state) => state.cart.items);
   const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
 
   const [isCheckout, setIsCheckout] = useState(false);
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartTotalPrice.toFixed(2)}`;
+  const totalAmount = `${cartTotalPrice.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
   const orderHandler = () => {
     setIsCheckout(true);
   };
 
   const cartItems = (
-    <ul className={classes["cart-items"]}>
+    <ul>
       {cartItemsState.map((item) => (
-        <CartItem
-          id={item.itemId}
-          name={item.name}
-          amount={item.quantity}
-          price={item.price}
-        />
+        <CartItem id={item.itemId} name={item.name} amount={item.quantity} price={item.price} />
       ))}
     </ul>
   );
   const modalAction = (
-    <div className={classes.actions}>
-      <button className={classes["button--alt"]} onClick={props.onClose}>
-        Close
-      </button>
-      {hasItems && (
-        <button className={classes.button} onClick={orderHandler}>
-          Order
-        </button>
-      )}
+    <div>
+      <button onClick={onClose}>Close</button>
+      {hasItems && <button onClick={orderHandler}>Order</button>}
     </div>
   );
 
   return (
-    <Modal onClose={props.onClose}>
+    <Modal onClose={onClose}>
       {cartItems}
-      <div className={classes.total}>
+      <div>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckout && <Checkout onCancel={props.onClose} />}
+      {isCheckout && <Checkout onCancel={onClose} />}
       {!isCheckout && modalAction}
     </Modal>
   );
-};
+}
 
 export default Cart;
