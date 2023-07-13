@@ -28,7 +28,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   useEffect(() => {
@@ -53,6 +53,6 @@ function App() {
       </ThemeProvider>
     </React.StrictMode>
   );
-}
+};
 
 export default App;

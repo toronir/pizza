@@ -1,7 +1,7 @@
 import AuthenticationForm from '../components/Authentication/AuthenticationForm';
 
-function AuthenticationPage() {
+const AuthenticationPage = () => {
   return <AuthenticationForm />;
-}
+};
 
 export default AuthenticationPage;

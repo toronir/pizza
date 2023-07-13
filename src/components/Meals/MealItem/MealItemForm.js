@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import Input from '../../UI/Input';
 
-function MealItemForm({ id, onAddToCart }) {
+const MealItemForm = ({ id, onAddToCart }) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
   const amountInputRef = useRef();
 
@@ -37,6 +37,6 @@ function MealItemForm({ id, onAddToCart }) {
       {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
     </form>
   );
-}
+};
 
 export default MealItemForm;

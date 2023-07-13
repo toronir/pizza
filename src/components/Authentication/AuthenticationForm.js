@@ -8,7 +8,7 @@ import Alert from '../UI/Alert';
 import Button from '../UI/Button';
 import { login } from '../../store/auth-slice';
 
-function AuthenticationForm() {
+const AuthenticationForm = () => {
   const [searchParams] = useSearchParams();
   const isUserLogin = searchParams.get('state') === 'login';
   const navigate = useNavigate();
@@ -98,6 +98,6 @@ function AuthenticationForm() {
       </Card>
     </div>
   );
-}
+};
 
 export default AuthenticationForm;

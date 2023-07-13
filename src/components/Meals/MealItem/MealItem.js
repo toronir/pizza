@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
 
-function MealItem({ id, name, description, price }) {
+const MealItem = ({ id, name, description, price }) => {
   const dispatch = useDispatch();
   const addToCartHandler = (quantity) => {
     dispatch(
@@ -29,6 +29,6 @@ function MealItem({ id, name, description, price }) {
       </div>
     </li>
   );
-}
+};
 
 export default MealItem;

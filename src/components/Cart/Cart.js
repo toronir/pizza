@@ -6,7 +6,7 @@ import CartItem from './CartItem';
 import CartContext from '../../store/cart-context';
 import Checkout from './Checkout';
 
-function Cart({ onClose }) {
+const Cart = ({ onClose }) => {
   const cartItemsState = useSelector((state) => state.cart.items);
   const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
 
@@ -44,6 +44,6 @@ function Cart({ onClose }) {
       {!isCheckout && modalAction}
     </Modal>
   );
-}
+};
 
 export default Cart;

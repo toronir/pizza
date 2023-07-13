@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import MealItem from './MealItem/MealItem';
 import Card from '../UI/Card';
 
-function AvailableMeals() {
+const AvailableMeals = () => {
   const setMeals = useState([])[1];
   const [isLoading, setisLoading] = useState(true);
   const [reqError, setReqError] = useState(false);
@@ -67,6 +67,6 @@ function AvailableMeals() {
       </Card>
     </section>
   );
-}
+};
 
 export default AvailableMeals;

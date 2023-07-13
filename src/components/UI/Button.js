@@ -18,12 +18,12 @@ const ButtonStyled = styled.button`
   }
 `;
 
-function Button({ children, type }, props) {
+const Button = ({ children, type }, props) => {
   return (
     <ButtonStyled type={type} {...props}>
       {children}
     </ButtonStyled>
   );
-}
+};
 
 export default Button;

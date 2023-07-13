@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { SplideSlide } from '@splidejs/react-splide';
 
 const SliderItem = () => {

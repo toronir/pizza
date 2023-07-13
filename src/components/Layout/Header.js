@@ -6,13 +6,13 @@ const MainHeader = styled.header`
   background-color: white;
 `;
 
-function Header({ onShowCart }) {
+const Header = ({ onShowCart }) => {
   return (
     <MainHeader>
       <MainNavigation />
       <HeaderCartButton onClick={onShowCart} />
     </MainHeader>
   );
-}
+};
 
 export default Header;

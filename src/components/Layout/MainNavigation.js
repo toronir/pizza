@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import auth from '../../firebase-config';
 import { login, logout, selectUser } from '../../store/auth-slice';
 
-function MainNavigation() {
+const MainNavigation = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -47,6 +47,6 @@ function MainNavigation() {
       )}
     </ul>
   );
-}
+};
 
 export default MainNavigation;

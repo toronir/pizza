@@ -34,5 +34,4 @@ const getCartData = () => {
     fetchData();
   };
 };
-
 export default getCartData;

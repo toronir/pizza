@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import CartIcon from '../Cart/CartIcon';
 
-function HeaderCartButton({ onClick }) {
+const HeaderCartButton = ({ onClick }) => {
   const quantity = useSelector((state) => state.cart.totalQuantity);
 
   return (
@@ -13,6 +13,6 @@ function HeaderCartButton({ onClick }) {
       <span>{quantity}</span>
     </button>
   );
-}
+};
 
 export default HeaderCartButton;

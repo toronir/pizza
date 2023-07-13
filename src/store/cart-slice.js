@@ -36,13 +36,13 @@ export const cartSlice = createSlice({
     removeItemFromCart(state, actions) {
       const id = actions.payload;
       const existingItem = state.items.find((item) => item.itemId === id);
-      state.totalQuantity--;
+      state.totalQuantity -= 1;
       state.totalPrice -= existingItem.price;
       state.isChange = true;
       if (existingItem.quantity <= 1) {
         state.items = state.items.filter((item) => item.itemId !== id);
       } else {
-        existingItem.quantity--;
+        existingItem.quantity -= 1;
       }
     },
   },

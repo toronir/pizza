@@ -23,8 +23,8 @@ const Pargraph = styled.p`
   }
 `;
 
-function Alert({ message, type = 'error' }) {
+const Alert = ({ message, type = 'error' }) => {
   return <Pargraph type={type}>{message}</Pargraph>;
-}
+};
 
 export default Alert;

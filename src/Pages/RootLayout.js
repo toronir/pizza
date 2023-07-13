@@ -4,7 +4,7 @@ import Header from '../components/Layout/Header';
 import Cart from '../components/Cart/Cart';
 import CartProvider from '../store/CartProvider';
 
-function RootLayout() {
+const RootLayout = () => {
   const [cartIsShown, setCartIsShown] = useState(false);
 
   const showCartHandler = () => {
@@ -24,6 +24,6 @@ function RootLayout() {
       </main>
     </CartProvider>
   );
-}
+};
 
 export default RootLayout;

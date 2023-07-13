@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useRef, useState } from 'react';
 
-function Checkout({ onCancel }) {
+const Checkout = ({ onCancel }) => {
   const isEmpty = (value) => value.trim() === '';
 
   const legthCheck = (value) => value.trim().length === 5;
@@ -76,5 +76,5 @@ function Checkout({ onCancel }) {
       </div>
     </form>
   );
-}
+};
 export default Checkout;

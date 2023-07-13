@@ -7,8 +7,8 @@ const Div = styled.div`
   background-color: white;
 `;
 
-function Card({ children }) {
+const Card = ({ children }) => {
   return <Div>{children}</Div>;
-}
+};
 
 export default Card;

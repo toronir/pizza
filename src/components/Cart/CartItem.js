@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { cartSlice } from '../../store/cart-slice';
 
-function CartItem({ id, name, price, key, amount }) {
+const CartItem = ({ id, name, price, key, amount }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
     dispatch(
@@ -33,6 +33,6 @@ function CartItem({ id, name, price, key, amount }) {
       </div>
     </li>
   );
-}
+};
 
 export default CartItem;
