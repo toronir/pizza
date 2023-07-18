@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { cartSlice } from '../../store/cart-slice';
 
-const CartItem = ({ id, name, price, key, amount }) => {
+const CartItem = ({ id, name, price, amount }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
     dispatch(
@@ -19,7 +19,7 @@ const CartItem = ({ id, name, price, key, amount }) => {
   const priceFormatted = `${price.toFixed(2)}`;
 
   return (
-    <li key={key}>
+    <li>
       <div>
         <h2>{name}</h2>
         <div>

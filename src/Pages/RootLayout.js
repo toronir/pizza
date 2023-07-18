@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router';
 import Header from '../components/Layout/Header';
 import Cart from '../components/Cart/Cart';
+import Footer from '../components/Layout/Footer';
 import CartProvider from '../store/CartProvider';
 
 const RootLayout = () => {
@@ -22,6 +23,7 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
+      <Footer />
     </CartProvider>
   );
 };

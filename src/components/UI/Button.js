@@ -3,18 +3,16 @@ import styled from 'styled-components';
 const ButtonStyled = styled.button`
   display: block;
   width: 100%;
-  font-weight: 600;
-  color: #fff;
+  font-weight: ${({ theme }) => theme.bold};
+  color: ${({ theme }) => theme.color.white};
   padding: 0.25rem 2rem;
-  border: 1px solid #8a2b06;
-  border-radius: 20px;
-  background-color: #8a2b06;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  border-radius: 2rem;
+  border: 1px solid ${({ theme }) => theme.color.lightGreen};
+  background-color: ${({ theme }) => theme.color.lightGreen};
+  cursor: pointer;
   @media (min-width: 768px) {
     display: inline-block;
     width: auto;
-    margin-right: 15px;
   }
 `;
 

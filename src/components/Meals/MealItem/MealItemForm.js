@@ -1,7 +1,31 @@
 import { useRef, useState } from 'react';
+import styled from 'styled-components';
 import Input from '../../UI/Input';
+import Button from '../../UI/Button';
 
-const MealItemForm = ({ id, onAddToCart }) => {
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & input {
+    text-align: center;
+    min-width: 5rem;
+    margin-right: 0.5rem;
+    border: 1px solid ${({ theme }) => theme.color.dirtyGray};
+    border-radius: 2rem;
+    padding: 0.2rem 0.5rem;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type='number'] {
+      -moz-appearance: textfield;
+    }
+  }
+`;
+
+const MealItemForm = ({ id, price, onAddToCart }) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
   const amountInputRef = useRef();
 
@@ -20,10 +44,11 @@ const MealItemForm = ({ id, onAddToCart }) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler}>
       <Input
         ref={amountInputRef}
         label="Amount"
+        hidden
         input={{
           id: `amount_${id}`,
           type: 'number',
@@ -33,9 +58,9 @@ const MealItemForm = ({ id, onAddToCart }) => {
           defaultValue: '1',
         }}
       />
-      <button>+ Add</button>
+      <Button>${price}</Button>
       {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
-    </form>
+    </Form>
   );
 };
 

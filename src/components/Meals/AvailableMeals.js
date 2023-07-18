@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { SplideSlide } from '@splidejs/react-splide';
 import MealItem from './MealItem/MealItem';
-import Card from '../UI/Card';
+import Slider from '../Slider/Slider';
 
 const AvailableMeals = () => {
   const setMeals = useState([])[1];
@@ -51,20 +52,39 @@ const AvailableMeals = () => {
   }
 
   const mealsList = mealsState.map((meal) => (
-    <MealItem
-      key={meal.id}
-      id={meal.id}
-      name={meal.name}
-      description={meal.description}
-      price={meal.price}
-    />
+    <SplideSlide key={meal.id}>
+      <MealItem
+        key={meal.id}
+        id={meal.id}
+        name={meal.name}
+        description={meal.description}
+        price={meal.price}
+      />
+    </SplideSlide>
   ));
 
   return (
     <section>
-      <Card>
-        <ul>{mealsList}</ul>
-      </Card>
+      <Slider
+        options={{
+          rewind: false,
+          pagination: false,
+          type: 'loop',
+          gap: '1rem',
+          width: '100%',
+          perPage: 3,
+          breakpoints: {
+            1300: {
+              perPage: 2,
+            },
+            800: {
+              perPage: 1,
+            },
+          },
+        }}
+      >
+        {mealsList}
+      </Slider>
     </section>
   );
 };

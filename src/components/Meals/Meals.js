@@ -1,10 +1,12 @@
-import MealsSummary from './MealsSummary';
 import AvailableMeals from './AvailableMeals';
+import Title from '../UI/Title';
 
 const Meals = () => {
   return (
     <>
-      <MealsSummary />
+      <Title>Free delivery</Title>
+      <AvailableMeals />
+      <Title>Fastest delivery</Title>
       <AvailableMeals />
     </>
   );

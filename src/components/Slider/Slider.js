@@ -1,11 +1,11 @@
-// eslint-disable-next-line import/no-unresolved
 import { Splide } from '@splidejs/react-splide';
-import SliderItem from './SliderItem';
+// eslint-disable-next-line import/no-unresolved
+import '@splidejs/react-splide/css';
 
-const Slider = () => {
+const Slider = ({ options, children }) => {
   return (
-    <Splide aria-label="My Favorite Images">
-      <SliderItem />
+    <Splide options={options} aria-label="My Favorite Meals">
+      {children}
     </Splide>
   );
 };

@@ -22,7 +22,13 @@ const Cart = ({ onClose }) => {
   const cartItems = (
     <ul>
       {cartItemsState.map((item) => (
-        <CartItem id={item.itemId} name={item.name} amount={item.quantity} price={item.price} />
+        <CartItem
+          key={item.itemId}
+          id={item.itemId}
+          name={item.name}
+          amount={item.quantity}
+          price={item.price}
+        />
       ))}
     </ul>
   );
