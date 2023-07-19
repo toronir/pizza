@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import FooterItem from './FooterItem';
+import Logo from '../UI/Logo';
 
 const List = styled.ul`
   display: flex;
@@ -21,7 +22,9 @@ const FooterListItem = () => {
   return (
     <List>
       <li>
-        <Link to="/">Logo</Link>
+        <Link to="/">
+          <Logo />
+        </Link>
       </li>
       <FooterItem />
       <FooterItem />
