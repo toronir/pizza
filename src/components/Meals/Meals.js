@@ -4,10 +4,14 @@ import Title from '../UI/Title';
 const Meals = () => {
   return (
     <>
-      <Title>Free delivery</Title>
-      <AvailableMeals />
-      <Title>Fastest delivery</Title>
-      <AvailableMeals />
+      <section>
+        <Title>Free delivery</Title>
+        <AvailableMeals />
+      </section>
+      <section>
+        <Title>Fastest delivery</Title>
+        <AvailableMeals />
+      </section>
     </>
   );
 };

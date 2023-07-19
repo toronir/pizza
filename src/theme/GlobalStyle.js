@@ -33,6 +33,16 @@ body{
         padding: 1.5rem;
     }
 }
+
+section{
+    margin-bottom: 2rem;
+    @media (min-width: 768px){
+        margin-bottom: 4rem;
+    }
+}
+p{
+    line-height: 1.4;
+}
 `;
 
 export default GlobalStyle;

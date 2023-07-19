@@ -6,6 +6,10 @@ import CartIcon from '../Cart/CartIcon';
 const Span = styled.span`
   font-size: ${({ theme }) => theme.fontSize.xs};
   padding: 0 0.5rem;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Button = styled.button`

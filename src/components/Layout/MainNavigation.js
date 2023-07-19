@@ -7,11 +7,13 @@ import auth from '../../firebase-config';
 import { login, logout, selectUser } from '../../store/auth-slice';
 import Button from '../UI/Button';
 import Logo from '../UI/Logo';
+import LogoMobile from '../UI/LogoMobile';
 
 const List = styled.ul`
   display: flex;
   list-style: none;
   padding-left: 0;
+  margin: 0.5rem 0;
 `;
 
 const ListItem = styled.li`
@@ -65,6 +67,7 @@ const MainNavigation = () => {
     <List>
       <li>
         <NavLink to="/">
+          <LogoMobile />
           <Logo />
         </NavLink>
       </li>
