@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Div = styled.div`
@@ -16,6 +17,15 @@ const Div = styled.div`
 
 const Card = ({ children, maxwidth = null }) => {
   return <Div maxwidth={maxwidth}>{children}</Div>;
+};
+
+Card.defaultProps = {
+  maxwidth: null,
+};
+
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
+  maxwidth: PropTypes.string,
 };
 
 export default Card;

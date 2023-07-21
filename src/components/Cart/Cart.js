@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
@@ -47,6 +48,10 @@ const Cart = ({ onClose }) => {
       {!isCheckout && modalAction}
     </Modal>
   );
+};
+
+Cart.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Cart;

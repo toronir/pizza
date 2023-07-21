@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CartIcon from '../Cart/CartIcon';
 // import Button from '../UI/Button';
@@ -36,6 +37,10 @@ const HeaderCartButton = ({ onClick }) => {
       <span> {quantity}</span>
     </Button>
   );
+};
+
+HeaderCartButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 };
 
 export default HeaderCartButton;

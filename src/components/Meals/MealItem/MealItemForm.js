@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
@@ -62,6 +63,12 @@ const MealItemForm = ({ id, price, onAddToCart }) => {
       {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
     </Form>
   );
+};
+
+MealItemForm.propTypes = {
+  id: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  onAddToCart: PropTypes.func.isRequired,
 };
 
 export default MealItemForm;

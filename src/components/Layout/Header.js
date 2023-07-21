@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import HeaderCartButton from './HeaderCartButton';
 import MainNavigation from './MainNavigation';
@@ -19,6 +20,10 @@ const Header = ({ onShowCart }) => {
       </div>
     </MainHeader>
   );
+};
+
+Header.propTypes = {
+  onShowCart: PropTypes.func.isRequired,
 };
 
 export default Header;

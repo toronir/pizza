@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Checkout = ({ onCancel }) => {
   const isEmpty = (value) => value.trim() === '';
@@ -76,5 +77,9 @@ const Checkout = ({ onCancel }) => {
       </div>
     </form>
   );
+};
+
+Checkout.propTypes = {
+  onCancel: PropTypes.func.isRequired,
 };
 export default Checkout;

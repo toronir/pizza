@@ -28,13 +28,13 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" price="12" type="category" />
+            <MealItem id="2" name="category 1" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" price="12" type="category" />
+            <MealItem id="2" name="category 1" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" price="12" type="category" />
+            <MealItem id="2" name="category 1" description="fresh" type="category" />
           </SplideSlide>
         </Slider>
       </section>
@@ -66,7 +66,7 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" price="12" type="category" />
+            <MealItem id="2" name="category 1" description="fresh" type="category" />
           </SplideSlide>
         </Slider>
       </section>

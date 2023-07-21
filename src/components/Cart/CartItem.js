@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { cartSlice } from '../../store/cart-slice';
 
 const CartItem = ({ id, name, price, amount }) => {
@@ -33,6 +34,13 @@ const CartItem = ({ id, name, price, amount }) => {
       </div>
     </li>
   );
+};
+
+CartItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  amount: PropTypes.number.isRequired,
 };
 
 export default CartItem;

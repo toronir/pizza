@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const TitleStyled = styled.h2`
@@ -9,6 +10,10 @@ const TitleStyled = styled.h2`
 
 const Title = ({ children }) => {
   return <TitleStyled>{children}</TitleStyled>;
+};
+
+Title.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Title;

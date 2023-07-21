@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
@@ -96,7 +97,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
           <MealTitle>{name}</MealTitle>
           <MealDecription>{description}</MealDecription>
         </div>
-        {!type && <MealItemForm id={id} price={priceFormatted} onAddToCart={addToCartHandler} />}
+        {!type && <MealItemForm id={id} price={+priceFormatted} onAddToCart={addToCartHandler} />}
       </MealContent>
       {!type && (
         <BottomDiv>
@@ -106,6 +107,19 @@ const MealItem = ({ id, name, description, price, type = null }) => {
       )}
     </MealItemStyled>
   );
+};
+
+MealItem.defaultProps = {
+  price: null,
+  type: null,
+};
+
+MealItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number,
+  type: PropTypes.string,
 };
 
 export default MealItem;

@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const ModalBackdrop = styled.div`
   position: fixed;
@@ -39,6 +40,24 @@ const Modal = ({ children, onClose, width }) => {
       )}
     </ModalBackdrop>
   );
+};
+
+Modal.defaultProps = {
+  width: null,
+};
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  width: PropTypes.string,
+};
+
+ModalOverlayStyle.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+ModalBackdrop.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

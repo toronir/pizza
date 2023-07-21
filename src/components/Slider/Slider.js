@@ -1,6 +1,7 @@
 import { Splide } from '@splidejs/react-splide';
 // eslint-disable-next-line import/no-unresolved
 import '@splidejs/react-splide/css';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SliderStyled = styled(Splide)`
@@ -20,6 +21,15 @@ const Slider = ({ options, children }) => {
       {children}
     </SliderStyled>
   );
+};
+
+Slider.defaultProps = {
+  options: null,
+};
+
+Slider.propTypes = {
+  options: PropTypes.objectOf(PropTypes.any),
+  children: PropTypes.node.isRequired,
 };
 
 export default Slider;
