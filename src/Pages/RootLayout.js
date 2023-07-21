@@ -3,28 +3,27 @@ import { Outlet } from 'react-router';
 import Header from '../components/Layout/Header';
 import Cart from '../components/Cart/Cart';
 import Footer from '../components/Layout/Footer';
-import CartProvider from '../store/CartProvider';
 
 const RootLayout = () => {
-  const [cartIsShown, setCartIsShown] = useState(false);
+  const [modalIsShown, setModalIsShown] = useState(false);
 
-  const showCartHandler = () => {
-    setCartIsShown(true);
+  const showModalHandler = () => {
+    setModalIsShown(true);
   };
 
-  const hideCartHandler = () => {
-    setCartIsShown(false);
+  const hideModalHandler = () => {
+    setModalIsShown(false);
   };
 
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
+    <>
+      {modalIsShown && <Cart onClose={hideModalHandler} />}
+      <Header onShowCart={showModalHandler} />
       <main>
         <Outlet />
       </main>
       <Footer />
-    </CartProvider>
+    </>
   );
 };
 

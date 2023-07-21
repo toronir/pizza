@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
 import imgFood from '../../../assets/img/pizza_mix.jpg';
+import { mealsSlice } from '../../../store/meals-slice';
 
 const MealItemStyled = styled.div`
   margin-bottom: 1rem;
@@ -69,6 +70,9 @@ const BottomDiv = styled.div`
 
 const MealItem = ({ id, name, description, price, type = null }) => {
   const dispatch = useDispatch();
+  const openDitail = () => {
+    dispatch(mealsSlice.actions.setModalOpen(id));
+  };
   const addToCartHandler = (quantity) => {
     dispatch(
       cartSlice.actions.addItemCart({
@@ -79,14 +83,13 @@ const MealItem = ({ id, name, description, price, type = null }) => {
       }),
     );
   };
-
   const priceToNumber = +price;
   const priceFormatted = `${priceToNumber.toFixed(2)}`;
 
   return (
     <MealItemStyled>
       <Link to="/">
-        <MealImg src={imgFood} alt={name} />
+        <MealImg src={imgFood} alt={name} onClick={openDitail} />
       </Link>
       <MealContent>
         <div>

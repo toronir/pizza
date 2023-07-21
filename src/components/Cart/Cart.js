@@ -1,9 +1,7 @@
-import { useContext, useState } from 'react';
-
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
-import CartContext from '../../store/cart-context';
 import Checkout from './Checkout';
 
 const Cart = ({ onClose }) => {
@@ -11,10 +9,9 @@ const Cart = ({ onClose }) => {
   const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
 
   const [isCheckout, setIsCheckout] = useState(false);
-  const cartCtx = useContext(CartContext);
 
   const totalAmount = `${cartTotalPrice.toFixed(2)}`;
-  const hasItems = cartCtx.items.length > 0;
+  const hasItems = cartItemsState.length > 0;
   const orderHandler = () => {
     setIsCheckout(true);
   };

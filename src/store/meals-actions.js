@@ -19,6 +19,8 @@ const getMealsData = () => {
             name: responseData[key].name,
             description: responseData[key].description,
             price: responseData[key].price,
+            ingredients: responseData[key].ingredients,
+            tags: responseData[key].tags,
           });
         }
       }

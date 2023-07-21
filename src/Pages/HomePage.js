@@ -1,13 +1,17 @@
+import { useSelector } from 'react-redux';
 import { SplideSlide } from '@splidejs/react-splide';
 import Meals from '../components/Meals/Meals';
 import Slider from '../components/Slider/Slider';
 import MealItem from '../components/Meals/MealItem/MealItem';
+import Detail from '../components/Detail/Detail';
 import Title from '../components/UI/Title';
 import MealsSummary from '../components/Meals/MealsSummary';
 
 const HomePage = () => {
+  const detailModal = useSelector((state) => state.meals.detailModal);
   return (
     <>
+      {detailModal.isModalOpen && <Detail />}
       <section>
         <Slider
           options={{
