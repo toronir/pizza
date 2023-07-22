@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import { mealsSlice } from '../../store/meals-slice';
+import { cartSlice } from '../../store/cart-slice';
 import imgFood from '../../assets/img/pizza_mix.jpg';
 import Modal from '../UI/Modal';
 import hotFoodIcon from '../../assets/img/icons/hot-food.svg';
@@ -39,6 +41,16 @@ const AddingProduct = styled.div`
     background-color: #77b28c;
     padding: 1rem;
     border-radius: 7px;
+    > span {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    > button {
+      border: none;
+      background-color: transparent;
+    }
   }
   > span:nth-child(odd) {
     background-color: #b6d8c2;
@@ -51,22 +63,46 @@ const AddingProduct = styled.div`
       border: none;
       border-radius: 50%;
     }
-    > span {
-      width: 40%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
   }
 `;
 const Detail = () => {
-  const idItemDetail = useSelector((state) => state.meals.detailModal.idItemDetail);
   const meals = useSelector((state) => state.meals.products);
+  const idItemDetail = useSelector((state) => state.meals.detailModal.idItemDetail);
   const currentProduct = meals.find((item) => item.id === idItemDetail);
+
+  const [product, setOProduct] = useState(1);
+  const [sumPrice, setSumPrice] = useState(currentProduct.price);
+
   const dispatch = useDispatch();
   const closeDitail = () => {
     dispatch(mealsSlice.actions.setModalClose());
   };
+  const addItemHandler = () => {
+    dispatch(
+      cartSlice.actions.addItemCart({
+        id: currentProduct.id,
+        name: currentProduct.name,
+        quantity: product,
+        price: currentProduct.price,
+      }),
+    );
+    closeDitail();
+  };
+  const plusProdouct = () => {
+    let prodValue = product;
+    let priceValue = sumPrice;
+    setOProduct((prodValue += 1));
+    setSumPrice((priceValue += currentProduct.price));
+  };
+  const minusProdouct = () => {
+    let prodValue = product;
+    let priceValue = sumPrice;
+    if (prodValue > 1) {
+      setOProduct((prodValue -= 1));
+      setSumPrice((priceValue -= currentProduct.price));
+    }
+  };
+
   const modalAction = <Close onClick={closeDitail}>X</Close>;
   return (
     <Modal width="60rem">
@@ -89,16 +125,17 @@ const Detail = () => {
       </div>
       <AddingProduct>
         <span>
-          <button>
+          <button onClick={minusProdouct}>
             <Icon src={minusIcon} alt="minus Icon" />
           </button>
-          <span>1</span>
-          <button>
+          <span>{product}</span>
+          <button onClick={plusProdouct}>
             <Icon src={plusIcon} alt="plus Icon" />
           </button>
         </span>
-        <span>
-          <button>Buy</button>
+        <span onClick={addItemHandler} role="button" tabIndex={0} onKeyPress={addItemHandler}>
+          <button>Add to order</button>
+          <span>{sumPrice.toFixed(2)}$</span>
         </span>
       </AddingProduct>
       {modalAction}
