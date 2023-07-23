@@ -31,14 +31,15 @@ const ModalOverlayStyle = styled.div`
 
 const portalElement = document.getElementById('overlays');
 
-const Modal = ({ children, onClose, width }) => {
+const Modal = ({ children, onClose, width = null }) => {
   return (
-    <ModalBackdrop onClick={onClose}>
+    <>
+      <ModalBackdrop onClick={onClose} />
       {ReactDOM.createPortal(
         <ModalOverlayStyle width={width}>{children}</ModalOverlayStyle>,
         portalElement,
       )}
-    </ModalBackdrop>
+    </>
   );
 };
 
