@@ -6,6 +6,7 @@ import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
 import imgFood from '../../../assets/img/pizza_mix.jpg';
 import { mealsSlice } from '../../../store/meals-slice';
+import LikeItem from '../../UI/LikeItem';
 
 const MealItemStyled = styled.div`
   margin-bottom: 1rem;
@@ -13,6 +14,14 @@ const MealItemStyled = styled.div`
   border-radius: 14px;
   background-color: white;
   overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  & .love-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 `;
 
 const MealImg = styled.img`
@@ -90,6 +99,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
   return (
     <MealItemStyled>
       <Link to="/">
+        {!type && <LikeItem />}
         <MealImg src={imgFood} alt={name} onClick={openDitail} />
       </Link>
       <MealContent>
