@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const Div = styled.div`
+const Container = styled.div`
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 14px;
@@ -14,4 +14,4 @@ const Div = styled.div`
     `};
 `;
 
-export default Div;
+export default Container;

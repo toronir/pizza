@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import Div from './Card.style';
+import Container from './Card.style';
 
 const Card = ({ children, maxwidth = null }) => {
-  return <Div maxwidth={maxwidth}>{children}</Div>;
+  return <Container maxwidth={maxwidth}>{children}</Container>;
 };
 
 Card.defaultProps = {
