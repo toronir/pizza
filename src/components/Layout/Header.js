@@ -1,15 +1,7 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import HeaderCartButton from './HeaderCartButton';
 import MainNavigation from './MainNavigation';
-
-const MainHeader = styled.header`
-  background-color: ${({ theme }) => theme.color.dirtyGray};
-  & > div {
-    display: flex;
-    justify-content: space-between;
-  }
-`;
+import MainHeader from './Header.style';
 
 const Header = ({ onShowCart }) => {
   return (
