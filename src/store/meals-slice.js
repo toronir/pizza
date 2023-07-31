@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const mealsSlice = createSlice({
   name: 'meals',
   initialState: {
+    category: 'pizza',
     detailModal: {
       isModalOpen: false,
       idItemDetail: '',

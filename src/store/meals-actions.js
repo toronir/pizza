@@ -4,7 +4,7 @@ const getMealsData = () => {
   return (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
+        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/meals/pizza.json',
       );
       if (!response.ok) {
         throw new Error('Error');

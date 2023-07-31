@@ -28,13 +28,13 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" type="category" />
+            <MealItem id="pizza" name="Pizza Category" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" type="category" />
+            <MealItem id="burger" name="Burger Category" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" type="category" />
+            <MealItem id="kebab" name="Kebab Category" description="fresh" type="category" />
           </SplideSlide>
         </Slider>
       </section>
@@ -48,10 +48,10 @@ const HomePage = () => {
             type: 'loop',
             gap: '1rem',
             width: '100%',
-            perPage: 6,
+            perPage: 3,
             breakpoints: {
               1400: {
-                perPage: 4,
+                perPage: 3,
               },
               992: {
                 perPage: 3,
@@ -66,7 +66,13 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <MealItem id="2" name="category 1" description="fresh" type="category" />
+            <MealItem id="pizza" name="Pizza Category" description="fresh" type="category" />
+          </SplideSlide>
+          <SplideSlide>
+            <MealItem id="burger" name="Burger Category" description="fresh" type="category" />
+          </SplideSlide>
+          <SplideSlide>
+            <MealItem id="kebab" name="Kebab Category" description="fresh" type="category" />
           </SplideSlide>
         </Slider>
       </section>

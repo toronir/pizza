@@ -23,7 +23,7 @@ export const ModalOverlayStyle = styled.div`
   ${({ width }) =>
     width &&
     css`
-      left: '50%';
+      left: 50%;
       width: ${width};
       transform: translateX(-50%);
     `}

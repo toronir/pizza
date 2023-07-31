@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { getDownloadURL, ref } from 'firebase/storage';
+import { fbStorage } from '../../../firebase-config';
 import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
-import imgFood from '../../../assets/img/pizza_mix.jpg';
 import { mealsSlice } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
+
+import imgFood from '../../../assets/img/pizza_mix.jpg';
+
 import {
   BottomDiv,
   MealContent,
@@ -17,6 +22,8 @@ import {
 
 const MealItem = ({ id, name, description, price, type = null }) => {
   const dispatch = useDispatch();
+  const [imgUrl, setImgUrl] = useState(imgFood);
+  const mealsCategory = useSelector((state) => state.meals.category);
   const openDitail = () => {
     dispatch(mealsSlice.actions.setModalOpen(id));
   };
@@ -30,6 +37,22 @@ const MealItem = ({ id, name, description, price, type = null }) => {
       }),
     );
   };
+  let imgName;
+  if (id.includes('m')) {
+    imgName = `${mealsCategory}_${id}`;
+  } else {
+    imgName = `category_${id}`;
+  }
+  const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
+  const getImgUrl = () => {
+    getDownloadURL(imageFolderRef).then((url) => {
+      return setImgUrl(url);
+    });
+  };
+  useEffect(() => {
+    getImgUrl();
+  }, []);
+
   const priceToNumber = +price;
   const priceFormatted = `${priceToNumber.toFixed(2)}`;
 
@@ -37,7 +60,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
     <MealItemStyled>
       <Link to="/">
         {!type && <LikeItem />}
-        <MealImg src={imgFood} alt={name} onClick={openDitail} />
+        <MealImg src={imgUrl} alt={name} onClick={openDitail} />
       </Link>
       <MealContent>
         <div>

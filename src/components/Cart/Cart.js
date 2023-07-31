@@ -5,7 +5,7 @@ import { Close, ItemList, Icon, OrderButton } from './Cart.style';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
-import closeIcon from '../../assets/img/icons/x-mark.svg';
+import closeIcon from '../../assets/img/icons/close.svg';
 
 const Cart = ({ onClose }) => {
   const cartItemsState = useSelector((state) => state.cart.items);
