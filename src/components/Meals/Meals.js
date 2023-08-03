@@ -5,11 +5,11 @@ const Meals = () => {
   return (
     <>
       <section>
-        <Title>Free delivery</Title>
+        <Title as="h2">Free delivery</Title>
         <AvailableMeals />
       </section>
       <section>
-        <Title>Fastest delivery</Title>
+        <Title as="h2">Fastest delivery</Title>
         <AvailableMeals />
       </section>
     </>

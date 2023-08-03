@@ -16,7 +16,8 @@
     "react/jsx-props-no-spreading": [
       1,
       {
-        "html": "ignore"
+        "html": "ignore",
+        "exceptions": ["ButtonStyled"]
       }
     ],
     "no-unused-vars": "warn"

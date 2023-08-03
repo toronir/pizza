@@ -40,7 +40,7 @@ const HomePage = () => {
       </section>
       <MealsSummary />
       <section>
-        <Title>Categories</Title>
+        <Title as="h2">Categories</Title>
         <Slider
           options={{
             rewind: false,

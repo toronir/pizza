@@ -4,6 +4,7 @@ import { cartSlice } from '../../store/cart-slice';
 import imgFood from '../../assets/img/pizza_mix.jpg';
 import minusIcon from '../../assets/img/icons/minus.svg';
 import plusIcon from '../../assets/img/icons/plus.svg';
+import trashIcon from '../../assets/img/icons/trash.svg';
 import { AddingProduct, Icon, ItemBlock, MealImg } from './CartItem.style';
 
 const CartItem = ({ id, name, price, amount }) => {
@@ -20,6 +21,14 @@ const CartItem = ({ id, name, price, amount }) => {
   };
   const removeItemHandler = () => {
     dispatch(cartSlice.actions.removeItemFromCart(id));
+  };
+
+  const removeTypeOfMeal = () => {
+    dispatch(
+      cartSlice.actions.removeTypeItems({
+        id,
+      }),
+    );
   };
   const priceFormatted = `${price.toFixed(2)}`;
 
@@ -43,6 +52,9 @@ const CartItem = ({ id, name, price, amount }) => {
             <Icon src={plusIcon} alt="plus Icon" />
           </button>
         </span>
+        <button onClick={removeTypeOfMeal}>
+          <Icon src={trashIcon} alt="delete items" />
+        </button>
       </AddingProduct>
     </ItemBlock>
   );

@@ -11,7 +11,6 @@ const Cart = ({ onClose }) => {
   const cartItemsState = useSelector((state) => state.cart.items);
   const cartTotalPrice = useSelector((state) => state.cart.totalPrice);
   const cartTotalQuantity = useSelector((state) => state.cart.totalQuantity);
-
   const [isCheckout, setIsCheckout] = useState(false);
 
   const totalAmount = `${cartTotalPrice.toFixed(2)}`;
@@ -50,7 +49,7 @@ const Cart = ({ onClose }) => {
   return (
     <Modal onClose={onClose}>
       {modalAction}
-      <h2>Your order</h2>
+      <h2>{hasItems ? 'Your order' : 'Your cart is empty :( '}</h2>
       {cartItems}
 
       {isCheckout && <Checkout onCancel={onClose} />}

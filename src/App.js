@@ -8,11 +8,13 @@ import ErrorPage from './Pages/ErrorPage';
 import HomePage from './Pages/HomePage';
 import MyAccountPage from './Pages/MyAccountPage';
 import AuthenticationPage from './Pages/AuthenticationPage';
+import WhishList from './components/WhishList/WhishList';
 import getMealsData from './store/meals-actions';
 import { sendCartData } from './store/cart-slice';
 import getCartData from './store/cart-actions';
 import GlobalStyle from './theme/GlobalStyle';
 import theme from './theme/mainTheme';
+import UserProfile from './components/UserProfile/UserProfile';
 
 let isInitial = true;
 const router = createBrowserRouter([
@@ -23,7 +25,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'authentication', element: <AuthenticationPage /> },
-      { path: 'my-account', element: <MyAccountPage /> },
+      {
+        path: 'my-account',
+        element: <MyAccountPage />,
+      },
+      { path: '/my-account/whishlist', element: <WhishList /> },
+      { path: '/my-account/my-data', element: <UserProfile /> },
     ],
   },
 ]);

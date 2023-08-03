@@ -56,6 +56,12 @@ export const AddingProduct = styled.div`
       border-radius: 50%;
     }
   }
+
+  > button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
 `;
 export const Icon = styled.img`
   max-width: 2.5rem;

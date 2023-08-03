@@ -14,6 +14,7 @@ export const Close = styled.button`
   background: transparent;
   border: none;
   font-weight: bold;
+  cursor: pointer;
 `;
 export const OrderButton = styled.span`
   display: flex;

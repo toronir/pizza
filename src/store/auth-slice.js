@@ -16,7 +16,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { getCurrentUser, login, logout } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 export const selectUser = (state) => state.auth.user;
 
