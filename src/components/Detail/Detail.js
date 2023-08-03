@@ -9,6 +9,7 @@ import discountIcon from '../../assets/img/icons/discount.svg';
 import freeDeliveryIcon from '../../assets/img/icons/free-delivery.svg';
 import minusIcon from '../../assets/img/icons/minus.svg';
 import plusIcon from '../../assets/img/icons/plus.svg';
+import closeIcon from '../../assets/img/icons/close.svg';
 import { AddingProduct, Close, Icon, MealImg } from './Detail.style';
 
 const Detail = () => {
@@ -16,12 +17,12 @@ const Detail = () => {
   const idItemDetail = useSelector((state) => state.meals.detailModal.idItemDetail);
   const currentProduct = meals.find((item) => item.id === idItemDetail);
 
-  const [product, setOProduct] = useState(1);
+  const [product, setProduct] = useState(1);
   const [sumPrice, setSumPrice] = useState(currentProduct.price);
 
   const dispatch = useDispatch();
-  const closeDitail = () => {
-    dispatch(mealsSlice.actions.setModalClose());
+  const closeDetail = () => {
+    dispatch(mealsSlice.actions.setToggleModal());
   };
   const addItemHandler = () => {
     dispatch(
@@ -32,24 +33,31 @@ const Detail = () => {
         price: currentProduct.price,
       }),
     );
-    closeDitail();
-  };
-  const plusProdouct = () => {
-    let prodValue = product;
-    let priceValue = sumPrice;
-    setOProduct((prodValue += 1));
-    setSumPrice((priceValue += currentProduct.price));
-  };
-  const minusProdouct = () => {
-    let prodValue = product;
-    let priceValue = sumPrice;
-    if (prodValue > 1) {
-      setOProduct((prodValue -= 1));
-      setSumPrice((priceValue -= currentProduct.price));
-    }
+    closeDetail();
   };
 
-  const modalAction = <Close onClick={closeDitail}>X</Close>;
+  const updateProduct = (e, type = 'plus') => {
+    let prodValue = product;
+    let priceValue = sumPrice;
+    const isMinimum = prodValue > 1;
+
+    if (type !== 'plus' && isMinimum) {
+      prodValue -= 1;
+      priceValue -= currentProduct.price;
+    } else if (type === 'plus') {
+      prodValue += 1;
+      priceValue += currentProduct.price;
+    }
+
+    setProduct(prodValue);
+    setSumPrice(priceValue);
+  };
+
+  const modalAction = (
+    <Close onClick={closeDetail}>
+      <Icon src={closeIcon} alt="close" />
+    </Close>
+  );
   return (
     <Modal width="60rem">
       <div>
@@ -59,23 +67,23 @@ const Detail = () => {
         <div>{currentProduct.ingredients}</div>
         <div>
           <span>
-            {currentProduct.tags.discount && <Icon src={discountIcon} alt="discount Icon" />}
+            {currentProduct.tags.discount && <Icon src={discountIcon} alt="discount icon" />}
           </span>
           <span>
             {currentProduct.tags.freeDelivery && (
-              <Icon src={freeDeliveryIcon} alt="free Delivery Icon" />
+              <Icon src={freeDeliveryIcon} alt="free delivery icon" />
             )}
           </span>
-          <span>{currentProduct.tags.hot && <Icon src={hotFoodIcon} alt="hot Food Icon" />}</span>
+          <span>{currentProduct.tags.hot && <Icon src={hotFoodIcon} alt="hot food icon" />}</span>
         </div>
       </div>
       <AddingProduct>
         <span>
-          <button onClick={minusProdouct}>
+          <button onClick={(e) => updateProduct(e, 'minus')}>
             <Icon src={minusIcon} alt="minus Icon" />
           </button>
           <span>{product}</span>
-          <button onClick={plusProdouct}>
+          <button onClick={(e) => updateProduct(e)}>
             <Icon src={plusIcon} alt="plus Icon" />
           </button>
         </span>

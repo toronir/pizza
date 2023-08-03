@@ -8,9 +8,7 @@ import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
 import { mealsSlice } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
-
 import imgFood from '../../../assets/img/pizza_mix.jpg';
-
 import {
   BottomDiv,
   MealContent,
@@ -25,7 +23,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
   const [imgUrl, setImgUrl] = useState(imgFood);
   const mealsCategory = useSelector((state) => state.meals.category);
   const openDetail = () => {
-    dispatch(mealsSlice.actions.setModalOpen(id));
+    dispatch(mealsSlice.actions.setToggleModal(id));
   };
   const addToCartHandler = (quantity) => {
     dispatch(

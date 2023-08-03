@@ -12,20 +12,15 @@ export const mealsSlice = createSlice({
   },
   reducers: {
     setMealsState(state, actions) {
-      // eslint-disable-next-line no-param-reassign
       state.products = actions.payload;
     },
-    setModalOpen(state, actions) {
-      state.detailModal.isModalOpen = true;
-      state.detailModal.idItemDetail = actions.payload;
-    },
-    setModalClose(state) {
-      state.detailModal.isModalOpen = false;
-      state.detailModal.idItemDetail = '';
+    setToggleModal(state, actions) {
+      state.detailModal.isModalOpen = !state.detailModal.isModalOpen;
+      state.detailModal.idItemDetail = actions.payload || '';
     },
   },
 });
 
-export const { setMealsState, setModalOpen, setModalClose } = mealsSlice.actions;
+export const { setMealsState, setModalOpen, setModalClose, setToggleModal } = mealsSlice.actions;
 
 export default mealsSlice.reducer;
