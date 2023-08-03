@@ -4,6 +4,9 @@ const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  top: 0;
+  left: 0;
   & input {
     text-align: center;
     min-width: 5rem;
@@ -19,6 +22,12 @@ const Form = styled.form`
     &[type='number'] {
       -moz-appearance: textfield;
     }
+  }
+  p {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: max-content;
   }
 `;
 

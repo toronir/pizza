@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Form from './MealItemForm.style';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
+import Alert from '../../UI/Alert';
 
 const MealItemForm = ({ id, price, onAddToCart }) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
@@ -23,7 +24,7 @@ const MealItemForm = ({ id, price, onAddToCart }) => {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} novalidate="novalidate">
       <Input
         ref={amountInputRef}
         label="Amount"
@@ -38,7 +39,7 @@ const MealItemForm = ({ id, price, onAddToCart }) => {
         }}
       />
       <Button>${price}</Button>
-      {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
+      {!amountIsValid && <Alert message="Please enter a valid amount (1-5)." />}
     </Form>
   );
 };

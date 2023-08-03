@@ -24,7 +24,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState(imgFood);
   const mealsCategory = useSelector((state) => state.meals.category);
-  const openDitail = () => {
+  const openDetail = () => {
     dispatch(mealsSlice.actions.setModalOpen(id));
   };
   const addToCartHandler = (quantity) => {
@@ -60,7 +60,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
     <MealItemStyled>
       <Link to="/">
         {!type && <LikeItem />}
-        <MealImg src={imgUrl} alt={name} onClick={openDitail} />
+        <MealImg src={imgUrl} alt={name} onClick={openDetail} />
       </Link>
       <MealContent>
         <div>
