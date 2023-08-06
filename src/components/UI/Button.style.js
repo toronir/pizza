@@ -14,6 +14,13 @@ const ButtonStyled = styled.button`
       background-color: ${color.lightGreen};
       font-weight: ${bold};
       border: 1px solid ${color.lightGreen};
+      ${({ $secondary }) =>
+        $secondary &&
+        css`
+          color: ${color.lightGreen};
+          background-color: ${color.white};
+          border: 1px solid ${color.lightGreen};
+        `}
     `};
   @media (min-width: 768px) {
     display: inline-block;

@@ -9,6 +9,7 @@ import MealsSummary from '../components/Meals/MealsSummary';
 
 const HomePage = () => {
   const detailModal = useSelector((state) => state.meals.detailModal);
+
   return (
     <>
       {detailModal.isModalOpen && <Detail />}

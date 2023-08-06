@@ -24,7 +24,7 @@ const MealItemForm = ({ id, price, onAddToCart }) => {
   };
 
   return (
-    <Form onSubmit={submitHandler} novalidate="novalidate">
+    <Form onSubmit={submitHandler} noValidate="novalidate">
       <Input
         ref={amountInputRef}
         label="Amount"

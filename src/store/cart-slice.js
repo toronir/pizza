@@ -7,6 +7,10 @@ export const cartSlice = createSlice({
     totalQuantity: 0,
     totalPrice: 0,
     isChange: false,
+    addToCartModal: {
+      isModalOpen: false,
+      idAddedItem: null,
+    },
   },
   reducers: {
     setCartState(state, actions) {
@@ -31,7 +35,6 @@ export const cartSlice = createSlice({
         extraItem.quantity += addedItem.quantity;
       }
     },
-
     removeItemFromCart(state, actions) {
       const id = actions.payload;
       const existingItem = state.items.find((item) => item.itemId === id);
@@ -54,6 +57,10 @@ export const cartSlice = createSlice({
         state.items = state.items.filter((item) => item.itemId !== id);
         state.isChange = true;
       }
+    },
+    toogleModalVisibility(state, actions) {
+      state.addToCartModal.isModalOpen = !state.addToCartModal.isModalOpen;
+      state.addToCartModal.idAddedItem = actions.payload || '';
     },
   },
 });
@@ -82,6 +89,12 @@ export const sendCartData = (cart) => {
     }
   };
 };
-export const { addItemCart, removeItemFromCart, setCartState, removeTypeItems } = cartSlice.actions;
+export const {
+  addItemCart,
+  removeItemFromCart,
+  setCartState,
+  removeTypeItems,
+  toogleModalVisibility,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
