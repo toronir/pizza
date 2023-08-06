@@ -58,7 +58,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
     <MealItemStyled>
       <Link to="/">
         {!type && <LikeItem />}
-        <MealImg src={imgUrl} alt={name} onClick={openDetail} />
+        <MealImg src={imgUrl} alt={name} onClick={!type ? openDetail : null} />
       </Link>
       <MealContent>
         <div>
