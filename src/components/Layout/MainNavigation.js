@@ -4,10 +4,11 @@ import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import auth from '../../firebase-config';
 import { login, logout, selectUser } from '../../store/auth-slice';
-import Button from '../UI/Button';
+// import Button from '../UI/Button';
 import Logo from '../UI/Logo';
 import LogoMobile from '../UI/LogoMobile';
-import { List, ListItem } from './MainNavigation.style';
+import userIcon from '../../assets/img/icons/user.svg';
+import { List, ListItem, LoggedItems } from './MainNavigation.style';
 
 const MainNavigation = () => {
   const currentUser = useSelector(selectUser);
@@ -48,9 +49,17 @@ const MainNavigation = () => {
         </ListItem>
       )}
       {currentUser && (
-        <ListItem>
-          <Button onClick={logoutUser}>Sign Out</Button>
-        </ListItem>
+        <LoggedItems>
+          <img src={userIcon} alt="User icon" />
+          <ul>
+            <li>
+              <NavLink to="/my-account">My account</NavLink>
+            </li>
+            <li>
+              <button onClick={logoutUser}>Sign Out</button>
+            </li>
+          </ul>
+        </LoggedItems>
       )}
     </List>
   );
