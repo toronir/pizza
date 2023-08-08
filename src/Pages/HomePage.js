@@ -7,8 +7,11 @@ import MealItem from '../components/Meals/MealItem/MealItem';
 import Detail from '../components/Detail/Detail';
 import Title from '../components/UI/Title';
 import MealsSummary from '../components/Meals/MealsSummary';
-import Image2 from '../assets/img/fries_burger.jpg';
-import Image3 from '../assets/img/hot_burger.jpg';
+import Image1 from '../assets/img/promo_slider_main/promobanner_1.png';
+import Image2 from '../assets/img/promo_slider_main/promobanner_2.png';
+import Image3 from '../assets/img/promo_slider_main/promobanner_3.png';
+import Image4 from '../assets/img/promo_slider_main/promobanner_4.png';
+import Image5 from '../assets/img/promo_slider_main/promobanner_5.png';
 
 const HomePage = () => {
   const detailModal = useSelector((state) => state.meals.detailModal);
@@ -32,7 +35,12 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <SlidePromo title="Super promocja" paragraph="3 w cenie 2" />
+            <SlidePromo
+              title="Super promocja"
+              paragraph="3 w cenie 2"
+              src={Image1}
+              alt="Tylko u nas!"
+            />
           </SplideSlide>
           <SplideSlide>
             <SlidePromo
@@ -47,6 +55,22 @@ const HomePage = () => {
               title="Najlepsze oferty!"
               paragraph="3 w cenie 2"
               src={Image3}
+              alt="Sprawdź naszą promocję!"
+            />
+          </SplideSlide>
+          <SplideSlide>
+            <SlidePromo
+              title="Najlepsze oferty!"
+              paragraph="3 w cenie 2"
+              src={Image4}
+              alt="Sprawdź naszą promocję!"
+            />
+          </SplideSlide>
+          <SplideSlide>
+            <SlidePromo
+              title="Najlepsze oferty!"
+              paragraph="3 w cenie 2"
+              src={Image5}
               alt="Sprawdź naszą promocję!"
             />
           </SplideSlide>
