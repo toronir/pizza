@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { cartSlice } from '../../store/cart-slice';
-import imgFood from '../../assets/img/pizza_mix.jpg';
+import imgFood from '../../assets/img/food.jpg';
 import minusIcon from '../../assets/img/icons/minus.svg';
 import plusIcon from '../../assets/img/icons/plus.svg';
 import trashIcon from '../../assets/img/icons/trash.svg';
