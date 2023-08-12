@@ -64,6 +64,7 @@ export const cartSlice = createSlice({
     },
   },
 });
+
 export const sendCartData = (cart) => {
   return async () => {
     const sendRequest = async () => {
@@ -89,6 +90,7 @@ export const sendCartData = (cart) => {
     }
   };
 };
+
 export const {
   addItemCart,
   removeItemFromCart,

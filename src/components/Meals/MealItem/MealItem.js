@@ -22,9 +22,9 @@ const MealItem = ({ id, name, description, price, type = null }) => {
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState(imgFood);
   const mealsCategory = useSelector((state) => state.meals.category);
-  const openDetail = () => {
-    dispatch(mealsSlice.actions.setToggleModal(id));
-  };
+  const userId = useSelector((state) => state.auth.user);
+
+  const openDetail = () => dispatch(mealsSlice.actions.setToggleModal(id));
   const addToCartHandler = (quantity) => {
     dispatch(
       cartSlice.actions.addItemCart({
@@ -55,7 +55,16 @@ const MealItem = ({ id, name, description, price, type = null }) => {
   return (
     <MealItemStyled>
       <Link to="/">
-        {!type && <LikeItem />}
+        {!type && userId && (
+          <LikeItem
+            id={id}
+            name={name}
+            description={description}
+            price={price}
+            src={imgUrl}
+            userId={userId.uid}
+          />
+        )}
         <MealImg src={imgUrl} alt={name} onClick={!type ? openDetail : null} />
       </Link>
       <MealContent>
