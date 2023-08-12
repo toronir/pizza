@@ -8,7 +8,7 @@ import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
 import { mealsSlice } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
-import imgFood from '../../../assets/img/pizza_mix.jpg';
+import imgFood from '../../../assets/img/food.jpg';
 import {
   BottomDiv,
   MealContent,
@@ -35,18 +35,16 @@ const MealItem = ({ id, name, description, price, type = null }) => {
       }),
     );
   };
-  let imgName;
-  if (id.includes('m')) {
-    imgName = `${mealsCategory}_${id}`;
-  } else {
-    imgName = `category_${id}`;
-  }
+  const imgName = id.includes('m') ? `${mealsCategory}_${id}` : `category_${id}`;
+
   const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
+
   const getImgUrl = () => {
-    getDownloadURL(imageFolderRef).then((url) => {
-      return setImgUrl(url);
-    });
+    getDownloadURL(imageFolderRef)
+      .then((url) => setImgUrl(url))
+      .catch(() => setImgUrl(imgFood));
   };
+
   useEffect(() => {
     getImgUrl();
   }, []);
