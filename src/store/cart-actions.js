@@ -1,11 +1,10 @@
 import { setCartState } from './cart-slice';
+import BASE_URL from '../variables/variables';
 
 const getCartData = () => {
   return (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch(
-        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/cart.json',
-      );
+      const response = await fetch(`${BASE_URL}/cart.json`);
       if (!response.ok) {
         throw new Error('Error');
       }

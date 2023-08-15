@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { SplideSlide } from '@splidejs/react-splide';
+import BASE_URL from '../../variables/variables';
 import MealItem from './MealItem/MealItem';
 import Slider from '../Slider/Slider';
 
@@ -11,9 +12,7 @@ const AvailableMeals = () => {
   const mealsState = useSelector((state) => state.meals.products);
   useEffect(() => {
     const waitForMeals = async () => {
-      const response = await fetch(
-        'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
-      );
+      const response = await fetch(`${BASE_URL}/meals.json`);
       if (!response.ok) {
         throw new Error('Error');
       }

@@ -9,10 +9,12 @@ export const MealItemStyled = styled.div`
   position: relative;
   top: 0;
   left: 0;
+  cursor: pointer;
   & .love-icon {
     position: absolute;
     right: 10px;
     top: 10px;
+    line-height: 0.7;
   }
 `;
 

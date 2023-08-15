@@ -1,49 +1,37 @@
-import { setWhishlistState } from './whishlist-slice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import BASE_URL from '../variables/variables';
 
-const userDataURL = 'https://react-b3fdf-default-rtdb.europe-west1.firebasedatabase.app/users.json';
+const userDataURL = `${BASE_URL}/users.json`;
 
-export const getWhishlistData = (currentUserId) => {
-  return (dispatch) => {
-    if (!currentUserId) return;
+export const getWhishlistData = createAsyncThunk(
+  'whishlist/getWhishlistData',
+  async (_, { getState }) => {
+    const fetchWhishlist = {
+      products: [],
+    };
+    const { user } = getState().auth;
 
-    const getWhishlistData2 = async () => {
+    if (user) {
       const getWhishlist = await fetch(userDataURL);
-
-      if (!getWhishlist.ok) {
-        throw new Error('Error');
-      }
-
       const responseWhishlist = await getWhishlist.json();
 
-      const fetchWhishlist = {
-        products: [],
-      };
-      fetchWhishlist.products.push(...responseWhishlist[currentUserId]);
-      dispatch(setWhishlistState(fetchWhishlist));
-    };
-
-    getWhishlistData2();
-  };
-};
-
-export const sendWhishlistData = (uid, whishlist) => {
-  return async () => {
-    const sendData = async () => {
-      const response = await fetch(userDataURL, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          [uid]: [...whishlist],
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Fail');
-      }
-    };
-    try {
-      await sendData();
-    } catch (error) {
-      console.log(error);
+      fetchWhishlist.products.push(...responseWhishlist[user.uid]);
     }
-  };
-};
+    return fetchWhishlist;
+  },
+);
+
+export const sendWhishlistData = createAsyncThunk(
+  'whishlist/setWhishlistData',
+  async (whishlist, { getState }) => {
+    const { user } = getState().auth;
+    if (!user) return;
+
+    await fetch(userDataURL, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        [user.uid]: [...whishlist],
+      }),
+    });
+  },
+);

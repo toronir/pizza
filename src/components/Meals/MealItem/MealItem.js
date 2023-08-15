@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -54,19 +53,17 @@ const MealItem = ({ id, name, description, price, type = null }) => {
 
   return (
     <MealItemStyled>
-      <Link to="/">
-        {!type && userId && (
-          <LikeItem
-            id={id}
-            name={name}
-            description={description}
-            price={price}
-            src={imgUrl}
-            userId={userId.uid}
-          />
-        )}
-        <MealImg src={imgUrl} alt={name} onClick={!type ? openDetail : null} />
-      </Link>
+      {!type && userId && (
+        <LikeItem
+          id={id}
+          name={name}
+          description={description}
+          price={price}
+          src={imgUrl}
+          userId={userId.uid}
+        />
+      )}
+      <MealImg src={imgUrl} alt={name} onClick={!type ? openDetail : null} />
       <MealContent>
         <div>
           <MealTitle>{name}</MealTitle>

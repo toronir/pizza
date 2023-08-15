@@ -1,21 +1,34 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearWhishlist } from '../../store/whishlist-slice';
 import Title from '../UI/Title';
+import Button from '../UI/Button';
 import MealItem from '../Meals/MealItem/MealItem';
 import MyAccountPage from '../../Pages/MyAccountPage';
-import WhishListContainer from './WhishList.style';
+import { WhishListContainer, WhislistHeader, WhishListItemsContainer } from './WhishList.style';
 
 const WhishList = () => {
   const list = useSelector((state) => state.whishlist.products);
+  const dispatch = useDispatch();
+
+  const handleClearWhishlist = () => {
+    dispatch(clearWhishlist());
+  };
+
   const whislistItems = list.map((product) => {
     const { id, name, price, description } = product.item;
     return <MealItem key={id} id={id} name={name} description={description} price={price} />;
   });
+
   return (
     <MyAccountPage>
-      <div>
-        <Title as="h1">Whishlist</Title>
-        <WhishListContainer>{whislistItems}</WhishListContainer>
-      </div>
+      <WhishListContainer>
+        <WhislistHeader>
+          <Title as="h1">Whishlist</Title>
+          {list.length && <Button onClick={handleClearWhishlist}>Clear Whishlist</Button>}
+        </WhislistHeader>
+        {list.length === 0 && <p>Sorry, you have no products in your wishlist</p>}
+        <WhishListItemsContainer>{whislistItems}</WhishListItemsContainer>
+      </WhishListContainer>
     </MyAccountPage>
   );
 };

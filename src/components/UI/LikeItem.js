@@ -1,18 +1,28 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { sendWhishlistData } from '../../store/whislist-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, removeProduct } from '../../store/whishlist-slice';
 import likeIcon from '../../assets/img/icons/love.svg';
+import checkIcon from '../../assets/img/icons/check.svg';
 import LikeItemStyled from './LikeItem.style';
 
-const LikeItem = ({ id, name, price, description, userId }) => {
-  const whishlist = [{ item: { id, name, price, description } }];
+const LikeItem = ({ id, name, price, description }) => {
+  const whishlist = useSelector((state) => state.whishlist);
+  const checkedProduct = whishlist.products.find((product) => product.item.id === id);
   const dispatch = useDispatch();
+
   const addToWhishList = () => {
-    dispatch(sendWhishlistData(userId, whishlist));
+    dispatch(addProduct({ item: { id, name, price, description } }));
   };
+  const removeProductFromWhishList = () => {
+    dispatch(removeProduct({ id }));
+  };
+
   return (
-    <LikeItemStyled className="love-icon" onClick={addToWhishList}>
-      <img src={likeIcon} alt="I love it" />
+    <LikeItemStyled
+      className="love-icon"
+      onClick={checkedProduct ? removeProductFromWhishList : addToWhishList}
+    >
+      <img src={checkedProduct ? checkIcon : likeIcon} alt="I love it" />
     </LikeItemStyled>
   );
 };
@@ -24,5 +34,4 @@ LikeItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  userId: PropTypes.string.isRequired,
 };
