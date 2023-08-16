@@ -17,10 +17,9 @@ import {
   MealTitle,
 } from './MealItem.style';
 
-const MealItem = ({ id, name, description, price, type = null }) => {
+const MealItem = ({ id, name, description, price, category = null, type = null }) => {
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState(imgFood);
-  const mealsCategory = useSelector((state) => state.meals.category);
   const userId = useSelector((state) => state.auth.user);
 
   const openDetail = () => dispatch(mealsSlice.actions.setToggleModal(id));
@@ -34,7 +33,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
       }),
     );
   };
-  const imgName = id.includes('m') ? `${mealsCategory}_${id}` : `category_${id}`;
+  const imgName = id.includes('m') ? `${category}_${id}` : `category_${id}`;
 
   const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
 
@@ -60,7 +59,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
           description={description}
           price={price}
           src={imgUrl}
-          userId={userId.uid}
+          category={category}
         />
       )}
       <MealImg src={imgUrl} alt={name} onClick={!type ? openDetail : null} />
@@ -83,6 +82,7 @@ const MealItem = ({ id, name, description, price, type = null }) => {
 
 MealItem.defaultProps = {
   price: null,
+  category: null,
   type: null,
 };
 
@@ -91,6 +91,7 @@ MealItem.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number,
+  category: PropTypes.string,
   type: PropTypes.string,
 };
 

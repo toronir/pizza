@@ -14,8 +14,8 @@ const whishlistSlice = createSlice({
       state.products = actions.payload.products;
     },
     addProduct(state, actions) {
-      const { id, name, description, price } = actions.payload.item;
-      state.products.push({ item: { id, name, price, description } });
+      const { id, name, category, description, price } = actions.payload.item;
+      state.products.push({ item: { id, name, category, price, description } });
       state.isChanged = true;
     },
     removeProduct(state, actions) {

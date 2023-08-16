@@ -15,8 +15,17 @@ const WhishList = () => {
   };
 
   const whislistItems = list.map((product) => {
-    const { id, name, price, description } = product.item;
-    return <MealItem key={id} id={id} name={name} description={description} price={price} />;
+    const { id, name, category, price, description } = product.item;
+    return (
+      <MealItem
+        key={id}
+        id={id}
+        name={name}
+        category={category}
+        description={description}
+        price={price}
+      />
+    );
   });
 
   return (

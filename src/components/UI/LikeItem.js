@@ -5,13 +5,17 @@ import likeIcon from '../../assets/img/icons/love.svg';
 import checkIcon from '../../assets/img/icons/check.svg';
 import LikeItemStyled from './LikeItem.style';
 
-const LikeItem = ({ id, name, price, description }) => {
+const LikeItem = ({ id, name, category, price, description }) => {
   const whishlist = useSelector((state) => state.whishlist);
-  const checkedProduct = whishlist.products.find((product) => product.item.id === id);
+
+  const checkedProduct = whishlist.products.find((product) => {
+    return product.item.id === id;
+  });
+
   const dispatch = useDispatch();
 
   const addToWhishList = () => {
-    dispatch(addProduct({ item: { id, name, price, description } }));
+    dispatch(addProduct({ item: { id, name, category, price, description } }));
   };
   const removeProductFromWhishList = () => {
     dispatch(removeProduct({ id }));
@@ -32,6 +36,7 @@ export default LikeItem;
 LikeItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
 };

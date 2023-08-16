@@ -14,8 +14,7 @@ export const getWhishlistData = createAsyncThunk(
     if (user) {
       const getWhishlist = await fetch(userDataURL);
       const responseWhishlist = await getWhishlist.json();
-
-      fetchWhishlist.products.push(...responseWhishlist[user.uid]);
+      fetchWhishlist.products.push(...responseWhishlist[user.uid].whishlist);
     }
     return fetchWhishlist;
   },
@@ -28,9 +27,9 @@ export const sendWhishlistData = createAsyncThunk(
     if (!user) return;
 
     await fetch(userDataURL, {
-      method: 'PATCH',
+      method: 'PUT',
       body: JSON.stringify({
-        [user.uid]: [...whishlist],
+        [user.uid]: { whishlist: [...whishlist] },
       }),
     });
   },
