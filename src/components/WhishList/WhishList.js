@@ -33,7 +33,7 @@ const WhishList = () => {
       <WhishListContainer>
         <WhislistHeader>
           <Title as="h1">Whishlist</Title>
-          {list.length && <Button onClick={handleClearWhishlist}>Clear Whishlist</Button>}
+          {list.length > 0 && <Button onClick={handleClearWhishlist}>Clear Whishlist</Button>}
         </WhislistHeader>
         {list.length === 0 && <p>Sorry, you have no products in your wishlist</p>}
         <WhishListItemsContainer>{whislistItems}</WhishListItemsContainer>
