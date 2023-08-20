@@ -3,7 +3,6 @@ import { SplideSlide } from '@splidejs/react-splide';
 import Meals from '../components/Meals/Meals';
 import Slider from '../components/Slider/Slider';
 import SlidePromo from '../components/Slider/SlidePromo';
-import MealItem from '../components/Meals/MealItem/MealItem';
 import Detail from '../components/Detail/Detail';
 import Title from '../components/UI/Title';
 import MealsSummary from '../components/Meals/MealsSummary';
@@ -12,6 +11,7 @@ import Image2 from '../assets/img/promo_slider_main/promobanner_2.png';
 import Image3 from '../assets/img/promo_slider_main/promobanner_3.png';
 import Image4 from '../assets/img/promo_slider_main/promobanner_4.png';
 import Image5 from '../assets/img/promo_slider_main/promobanner_5.png';
+import CategotyItem from '../components/Meals/MealItem/CategoryItem';
 
 const HomePage = () => {
   const detailModal = useSelector((state) => state.meals.detailModal);
@@ -76,7 +76,6 @@ const HomePage = () => {
           </SplideSlide>
         </Slider>
       </section>
-      <MealsSummary />
       <section>
         <Title as="h2">Categories</Title>
         <Slider
@@ -104,16 +103,20 @@ const HomePage = () => {
           }}
         >
           <SplideSlide>
-            <MealItem id="pizza" name="Pizza Category" description="fresh" type="category" />
+            <CategotyItem id="pizza" name="Pizza Category" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="burger" name="Burger Category" description="fresh" type="category" />
+            <CategotyItem id="burger" name="Burger Category" description="fresh" type="category" />
           </SplideSlide>
           <SplideSlide>
-            <MealItem id="kebab" name="Kebab Category" description="fresh" type="category" />
+            <CategotyItem id="kebab" name="Kebab Category" description="fresh" type="category" />
+          </SplideSlide>
+          <SplideSlide>
+            <CategotyItem id="fries" name="Fries Category" description="fresh" type="category" />
           </SplideSlide>
         </Slider>
       </section>
+      <MealsSummary />
       <Meals />
     </>
   );
