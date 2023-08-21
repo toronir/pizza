@@ -16,7 +16,7 @@ import UserProfile from './components/UserProfile/UserProfile';
 
 import { sendWhishlistData, getWhishlistData } from './store/whislist-actions';
 import { sendCartData } from './store/cart-slice';
-import { getMealsData, getMealsDataByTag } from './store/meals-actions';
+import { getMealsData } from './store/meals-actions';
 import getCartData from './store/cart-actions';
 
 const router = createBrowserRouter([
@@ -48,16 +48,11 @@ const App = () => {
   const { products, isChanged } = useSelector((state) => state.whishlist);
   const mealsCategory = useSelector((state) => state.meals.category);
   const mealsTag = useSelector((state) => state.meals.tag);
-  console.log(mealsTag);
   useEffect(() => {
     const fetchData = async () => {
       try {
         await Promise.all([dispatch(getWhishlistData())]);
-        if (mealsTag) {
-          dispatch(getMealsDataByTag(mealsTag));
-        } else {
-          dispatch(getMealsData(mealsCategory));
-        }
+        dispatch(getMealsData(mealsCategory, mealsTag));
         dispatch(getCartData());
       } catch (error) {
         throw new Error('Something went wrong...');
