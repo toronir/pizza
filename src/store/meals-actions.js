@@ -18,6 +18,7 @@ export const getMealsData = (category, tag = null) => {
               id: key,
               name: responseData[key].name,
               description: responseData[key].description,
+              category,
               price: responseData[key].price,
               ingredients: responseData[key].ingredients,
               tags: responseData[key].tags,

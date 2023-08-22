@@ -6,16 +6,9 @@ import { ListingSection, MealListingStyle } from './ListingMeals.style';
 const ListingMeals = () => {
   const mealsState = useSelector((state) => state.meals.products);
 
-  const mealsList = mealsState.map((meal) => (
-    <MealListingStyle>
-      <MealItem
-        key={`${meal.category}_${meal.id}`}
-        id={meal.id}
-        name={meal.name}
-        category={meal.category}
-        description={meal.description}
-        price={+meal.price}
-      />
+  const mealsList = mealsState.map(({ id, category, name, description, price }) => (
+    <MealListingStyle key={`${category}_${id}`}>
+      <MealItem id={id} name={name} category={category} description={description} price={+price} />
     </MealListingStyle>
   ));
 
