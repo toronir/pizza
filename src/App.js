@@ -1,43 +1,15 @@
 import React, { useEffect } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './theme/GlobalStyle';
 import theme from './theme/mainTheme';
-
-import RootLayout from './Pages/RootLayout';
-import ErrorPage from './Pages/ErrorPage';
-import HomePage from './Pages/HomePage';
-import ListingPage from './Pages/ListingPage';
-import AuthenticationPage from './Pages/AuthenticationPage';
-import WhishList from './components/WhishList/WhishList';
-import UserProfile from './components/UserProfile/UserProfile';
+import router from './router/router';
 
 import { getWhishlistData } from './store/whislist-actions';
 import { getMealsData } from './store/meals-actions';
 import { getCartData } from './store/cart-actions';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: 'authentication', element: <AuthenticationPage /> },
-      {
-        path: 'my-account',
-        element: <UserProfile />,
-      },
-      {
-        path: `category`,
-        element: <ListingPage />,
-      },
-      { path: '/my-account/whishlist', element: <WhishList /> },
-    ],
-  },
-]);
 
 const App = () => {
   const dispatch = useDispatch();
