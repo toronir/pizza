@@ -1,8 +1,12 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCartState } from './cart-slice';
 import BASE_URL from '../variables/variables';
 
-const getCartData = () => {
-  return (dispatch) => {
+export const getCartData = createAsyncThunk(
+  'cart/getCartData',
+  async (_, { getState, dispatch }) => {
+    const { user } = getState().auth;
+
     const fetchData = async () => {
       const response = await fetch(`${BASE_URL}/cart.json`);
       if (!response.ok) {
@@ -31,6 +35,31 @@ const getCartData = () => {
       dispatch(setCartState(fetchCart));
     };
     fetchData();
-  };
-};
-export default getCartData;
+  },
+);
+
+export const sendCartData = createAsyncThunk(
+  'whishlist/setWhishlistData',
+  async (_, { getState }) => {
+    const { user } = getState().auth;
+    const { items, totalQuantity, totalPrice } = getState().cart;
+    const sendRequest = async () => {
+      const response = await fetch(`${BASE_URL}/cart.json`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          items,
+          totalQuantity,
+          totalPrice: totalPrice > 0.01 ? totalPrice : 0,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Fail');
+      }
+    };
+    try {
+      await sendRequest();
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);

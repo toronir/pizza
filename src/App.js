@@ -15,9 +15,8 @@ import WhishList from './components/WhishList/WhishList';
 import UserProfile from './components/UserProfile/UserProfile';
 
 import { getWhishlistData } from './store/whislist-actions';
-import { sendCartData } from './store/cart-slice';
 import { getMealsData } from './store/meals-actions';
-import getCartData from './store/cart-actions';
+import { getCartData } from './store/cart-actions';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +41,6 @@ const router = createBrowserRouter([
 
 const App = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const userId = user ? user.uid : null;
   const mealsCategory = useSelector((state) => state.meals.category);
@@ -50,7 +48,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await Promise.all([dispatch(getWhishlistData())]);
+        dispatch(getWhishlistData());
         dispatch(getMealsData(mealsCategory, mealsTag));
         dispatch(getCartData());
       } catch (error) {
@@ -59,10 +57,6 @@ const App = () => {
     };
     fetchData();
   }, [userId, dispatch, mealsCategory, mealsTag]);
-
-  useEffect(() => {
-    if (cart.isChange) dispatch(sendCartData(cart));
-  }, [cart, dispatch]);
 
   return (
     <React.StrictMode>

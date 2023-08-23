@@ -5,6 +5,7 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { fbStorage } from '../../../firebase-config';
 import MealItemForm from './MealItemForm';
 import { cartSlice } from '../../../store/cart-slice';
+import { sendCartData } from '../../../store/cart-actions';
 import { mealsSlice } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
 import imgFood from '../../../assets/img/food.jpg';
@@ -31,6 +32,7 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
         price: +price,
       }),
     );
+    dispatch(sendCartData());
   };
   const imgName = `${category}_${id}`;
   const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);

@@ -7,7 +7,6 @@ export const cartSlice = createSlice({
     items: [],
     totalQuantity: 0,
     totalPrice: 0,
-    isChange: false,
     addToCartModal: {
       isModalOpen: false,
       idAddedItem: null,
@@ -24,7 +23,7 @@ export const cartSlice = createSlice({
       const extraItem = state.items.find((item) => item.itemId === addedItem.id);
       state.totalQuantity += addedItem.quantity;
       state.totalPrice += addedItem.quantity * addedItem.price;
-      state.isChange = true;
+
       if (!extraItem) {
         state.items.push({
           itemId: addedItem.id,
@@ -41,7 +40,7 @@ export const cartSlice = createSlice({
       const existingItem = state.items.find((item) => item.itemId === id);
       state.totalQuantity -= 1;
       state.totalPrice -= existingItem.price;
-      state.isChange = true;
+
       if (existingItem.quantity <= 1) {
         state.items = state.items.filter((item) => item.itemId !== id);
       } else {
@@ -56,7 +55,6 @@ export const cartSlice = createSlice({
         state.totalPrice -= itemTotalPrice;
         state.totalQuantity -= existingItem.quantity;
         state.items = state.items.filter((item) => item.itemId !== id);
-        state.isChange = true;
       }
     },
     toogleModalVisibility(state, actions) {
@@ -65,29 +63,6 @@ export const cartSlice = createSlice({
     },
   },
 });
-
-export const sendCartData = (cart) => {
-  return async () => {
-    const sendRequest = async () => {
-      const response = await fetch(`${BASE_URL}/cart.json`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          items: cart.items,
-          totalQuantity: cart.totalQuantity,
-          totalPrice: cart.totalPrice > 0.01 ? cart.totalPrice : 0,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error('Fail');
-      }
-    };
-    try {
-      await sendRequest();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
 export const {
   addItemCart,
