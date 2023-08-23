@@ -14,11 +14,14 @@ const whishlistSlice = createSlice({
     },
     addProduct(state, actions) {
       const { id, name, category, description, price } = actions.payload.item;
-      state.products.push({ item: { id, name, category, price, description } });
+      const keyId = `${category}_${id}`;
+      state.products.push({ item: { id, keyId, name, category, price, description } });
     },
     removeProduct(state, actions) {
-      const { id } = actions.payload;
-      state.products = state.products.filter((product) => product.item.id !== id);
+      const { id, category } = actions.payload;
+      state.products = state.products.filter(
+        (product) => product.item.keyId !== `${category}_${id}`,
+      );
     },
     clearWhishlist(state) {
       state.products = [];

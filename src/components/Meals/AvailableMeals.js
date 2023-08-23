@@ -6,15 +6,15 @@ import Slider from '../Slider/Slider';
 const AvailableMeals = () => {
   const mealsState = useSelector((state) => state.meals.products);
 
-  const mealsList = mealsState.map((meal) => (
-    <SplideSlide key={`${meal.category}_${meal.id}`}>
+  const mealsList = mealsState.map(({ category, id, name, description, price }) => (
+    <SplideSlide key={`${category}_${id}`}>
       <MealItem
-        key={`${meal.category}_${meal.id}`}
-        id={meal.id}
-        name={meal.name}
-        category={meal.category}
-        description={meal.description}
-        price={+meal.price}
+        key={`${category}_${id}`}
+        id={id}
+        name={name}
+        category={category}
+        description={description}
+        price={+price}
       />
     </SplideSlide>
   ));

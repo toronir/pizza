@@ -10,7 +10,7 @@ const LikeItem = ({ id, name, category, price, description }) => {
   const { products } = useSelector((state) => state.whishlist);
 
   const checkedProduct = products.find((product) => {
-    return product.item.id === id;
+    return product.item.keyId === `${category}_${id}`;
   });
 
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const LikeItem = ({ id, name, category, price, description }) => {
     dispatch(sendWhishlistData());
   };
   const removeProductFromWhishList = () => {
-    dispatch(removeProduct({ id }));
+    dispatch(removeProduct({ id, category }));
     dispatch(sendWhishlistData());
   };
 

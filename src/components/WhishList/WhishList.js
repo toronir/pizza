@@ -17,10 +17,10 @@ const WhishList = () => {
   };
 
   const whislistItems = list.map((product) => {
-    const { id, name, category, price, description } = product.item;
+    const { id, keyId, name, category, price, description } = product.item;
     return (
       <MealItem
-        key={id}
+        key={keyId}
         id={id}
         name={name}
         category={category}

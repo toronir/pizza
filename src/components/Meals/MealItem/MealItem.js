@@ -21,7 +21,6 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState(imgFood);
   const userId = useSelector((state) => state.auth.user);
-  const mealsCategory = useSelector((state) => state.meals.category);
   const openDetail = () => dispatch(mealsSlice.actions.setToggleModal(id));
   const addToCartHandler = (quantity) => {
     dispatch(
@@ -33,8 +32,7 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
       }),
     );
   };
-  const imgName = `${mealsCategory}_${id}`;
-
+  const imgName = `${category}_${id}`;
   const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
 
   const getImgUrl = () => {
@@ -44,7 +42,7 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
   };
   useEffect(() => {
     getImgUrl();
-  }, [mealsCategory]);
+  }, []);
 
   const priceToNumber = +price;
   const priceFormatted = `${priceToNumber.toFixed(2)}`;
