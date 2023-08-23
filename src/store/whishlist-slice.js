@@ -7,7 +7,6 @@ const whishlistSlice = createSlice({
   initialState: {
     products: [],
     isLoading: false,
-    isChanged: false,
   },
   reducers: {
     setWhishlistState(state, actions) {
@@ -16,16 +15,13 @@ const whishlistSlice = createSlice({
     addProduct(state, actions) {
       const { id, name, category, description, price } = actions.payload.item;
       state.products.push({ item: { id, name, category, price, description } });
-      state.isChanged = true;
     },
     removeProduct(state, actions) {
       const { id } = actions.payload;
       state.products = state.products.filter((product) => product.item.id !== id);
-      state.isChanged = true;
     },
     clearWhishlist(state) {
       state.products = [];
-      state.isChanged = true;
     },
   },
   extraReducers: (builder) => {

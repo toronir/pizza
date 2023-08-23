@@ -14,7 +14,7 @@ import AuthenticationPage from './Pages/AuthenticationPage';
 import WhishList from './components/WhishList/WhishList';
 import UserProfile from './components/UserProfile/UserProfile';
 
-import { sendWhishlistData, getWhishlistData } from './store/whislist-actions';
+import { getWhishlistData } from './store/whislist-actions';
 import { sendCartData } from './store/cart-slice';
 import { getMealsData } from './store/meals-actions';
 import getCartData from './store/cart-actions';
@@ -45,7 +45,6 @@ const App = () => {
   const cart = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const userId = user ? user.uid : null;
-  const { products, isChanged } = useSelector((state) => state.whishlist);
   const mealsCategory = useSelector((state) => state.meals.category);
   const mealsTag = useSelector((state) => state.meals.tag);
   useEffect(() => {
@@ -64,10 +63,6 @@ const App = () => {
   useEffect(() => {
     if (cart.isChange) dispatch(sendCartData(cart));
   }, [cart, dispatch]);
-
-  useEffect(() => {
-    if (isChanged) dispatch(sendWhishlistData(products));
-  }, [products, dispatch]);
 
   return (
     <React.StrictMode>

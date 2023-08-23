@@ -22,14 +22,15 @@ export const getWhishlistData = createAsyncThunk(
 
 export const sendWhishlistData = createAsyncThunk(
   'whishlist/setWhishlistData',
-  async (whishlist, { getState }) => {
+  async (_, { getState }) => {
     const { user } = getState().auth;
+    const { products } = getState().whishlist;
     if (!user) return;
 
     await fetch(userDataURL, {
       method: 'PUT',
       body: JSON.stringify({
-        [user.uid]: { whishlist: [...whishlist] },
+        [user.uid]: { whishlist: [...products] },
       }),
     });
   },

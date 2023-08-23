@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { clearWhishlist } from '../../store/whishlist-slice';
+import { sendWhishlistData } from '../../store/whislist-actions';
 import Title from '../UI/Title';
 import Button from '../UI/Button';
 import MealItem from '../Meals/MealItem/MealItem';
@@ -12,6 +13,7 @@ const WhishList = () => {
 
   const handleClearWhishlist = () => {
     dispatch(clearWhishlist());
+    dispatch(sendWhishlistData());
   };
 
   const whislistItems = list.map((product) => {
