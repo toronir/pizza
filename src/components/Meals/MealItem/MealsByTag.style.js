@@ -6,7 +6,7 @@ export const MealstByTagBlock = styled.div`
   align-items: center;
 `;
 
-export const MealstByTagElement = styled.span`
+export const MealsByTagElement = styled.span`
   min-width: 13rem;
   text-align: center;
   background-color: #77b28c;

@@ -1,37 +1,16 @@
 import { useDispatch } from 'react-redux';
-import { MealstByTagBlock, MealstByTagElement } from './MealsByTag.sryle';
-import { mealsSlice } from '../../../store/meals-slice';
+import { MealstByTagBlock, MealsByTagElement } from './MealsByTag.style';
+import { setTagState } from '../../../store/meals-slice';
 
 const MealstByTag = () => {
   const dispatch = useDispatch();
-
-  const changeTag = (tag) => {
-    dispatch(mealsSlice.actions.setTagState(tag));
-  };
+  const changeTag = (tag) => dispatch(setTagState(tag));
 
   return (
     <MealstByTagBlock>
-      <MealstByTagElement
-        onClick={() => {
-          changeTag('discount');
-        }}
-      >
-        Discount
-      </MealstByTagElement>
-      <MealstByTagElement
-        onClick={() => {
-          changeTag('freeDelivery');
-        }}
-      >
-        Free delivery
-      </MealstByTagElement>
-      <MealstByTagElement
-        onClick={() => {
-          changeTag('hot');
-        }}
-      >
-        Hot
-      </MealstByTagElement>
+      <MealsByTagElement onClick={() => changeTag('discount')}>Discount</MealsByTagElement>
+      <MealsByTagElement onClick={() => changeTag('freeDelivery')}>Free delivery</MealsByTagElement>
+      <MealsByTagElement onClick={() => changeTag('hot')}>Spicy</MealsByTagElement>
     </MealstByTagBlock>
   );
 };

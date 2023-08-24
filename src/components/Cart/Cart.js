@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Close, ItemList, Icon, OrderButton } from './Cart.style';
+import { Close, ItemList, OrderButton } from './Cart.style';
 import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
-import closeIcon from '../../assets/img/icons/close.svg';
+import { Close as CloseIcon } from '../../assets/img/icons/icons';
 
 const Cart = ({ onClose }) => {
   const cartItemsState = useSelector((state) => state.cart.items);
@@ -34,7 +34,7 @@ const Cart = ({ onClose }) => {
   );
   const modalAction = (
     <Close onClick={onClose}>
-      <Icon src={closeIcon} alt="close icon" />
+      <CloseIcon />
     </Close>
   );
   const orderButton = (

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { mealsSlice } from '../../store/meals-slice';
-import { cartSlice } from '../../store/cart-slice';
-import imgFood from '../../assets/img/food.jpg';
+import { setToggleModal } from '../../store/meals-slice';
+import { addItemCart } from '../../store/cart-slice';
 import Modal from '../UI/Modal';
+import imgFood from '../../assets/img/food.jpg';
 import hotFoodIcon from '../../assets/img/icons/hot-food.svg';
 import discountIcon from '../../assets/img/icons/discount.svg';
 import freeDeliveryIcon from '../../assets/img/icons/free-delivery.svg';
@@ -22,11 +22,11 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   const closeDetail = () => {
-    dispatch(mealsSlice.actions.setToggleModal());
+    dispatch(setToggleModal());
   };
   const addItemHandler = () => {
     dispatch(
-      cartSlice.actions.addItemCart({
+      addItemCart({
         id: currentProduct.id,
         name: currentProduct.name,
         quantity: product,

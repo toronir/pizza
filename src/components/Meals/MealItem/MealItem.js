@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { fbStorage } from '../../../firebase-config';
 import MealItemForm from './MealItemForm';
-import { cartSlice } from '../../../store/cart-slice';
+import { addItemCart } from '../../../store/cart-slice';
 import { sendCartData } from '../../../store/cart-actions';
-import { mealsSlice } from '../../../store/meals-slice';
+import { setToggleModal } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
 import imgFood from '../../../assets/img/food.jpg';
 import {
@@ -22,16 +22,9 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState(imgFood);
   const userId = useSelector((state) => state.auth.user);
-  const openDetail = () => dispatch(mealsSlice.actions.setToggleModal(id));
+  const openDetail = () => dispatch(setToggleModal(id));
   const addToCartHandler = (quantity) => {
-    dispatch(
-      cartSlice.actions.addItemCart({
-        id,
-        name,
-        quantity,
-        price: +price,
-      }),
-    );
+    dispatch(addItemCart({ id, name, quantity, price: +price }));
     dispatch(sendCartData());
   };
   const imgName = `${category}_${id}`;

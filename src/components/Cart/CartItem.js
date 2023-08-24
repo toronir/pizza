@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { cartSlice } from '../../store/cart-slice';
+import { addItemCart, removeItemFromCart, removeTypeItems } from '../../store/cart-slice';
 import { sendCartData } from '../../store/cart-actions';
 import imgFood from '../../assets/img/food.jpg';
 import minusIcon from '../../assets/img/icons/minus.svg';
@@ -11,27 +11,16 @@ import { AddingProduct, Icon, ItemBlock, MealImg } from './CartItem.style';
 const CartItem = ({ id, name, price, amount }) => {
   const dispatch = useDispatch();
   const addItemHandler = () => {
-    dispatch(
-      cartSlice.actions.addItemCart({
-        id,
-        name,
-        quantity: 1,
-        price,
-      }),
-    );
+    dispatch(addItemCart({ id, name, quantity: 1, price }));
     dispatch(sendCartData());
   };
   const removeItemHandler = () => {
-    dispatch(cartSlice.actions.removeItemFromCart(id));
+    dispatch(removeItemFromCart(id));
     dispatch(sendCartData());
   };
 
   const removeTypeOfMeal = () => {
-    dispatch(
-      cartSlice.actions.removeTypeItems({
-        id,
-      }),
-    );
+    dispatch(removeTypeItems({ id }));
     dispatch(sendCartData());
   };
   const priceFormatted = `${price.toFixed(2)}`;
