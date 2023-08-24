@@ -41,13 +41,17 @@ export const sendCartData = createAsyncThunk('cart/setCartData', async (_, { get
   const userId = user ? user.uid : 'default';
   const totalPriceFormatted = totalPrice.toFixed(2);
 
-  const newCart = {
-    [userId]: {
-      items,
-      totalQuantity,
-      totalPrice: totalPriceFormatted > 0.01 ? totalPriceFormatted : 0,
-    },
-  };
+  const newCart =
+    items.length > 0
+      ? {
+          [userId]: {
+            items,
+            totalQuantity,
+            totalPrice: totalPriceFormatted > 0.01 ? totalPriceFormatted : 0,
+          },
+        }
+      : { [userId]: {} };
+
   const sendRequest = async () => {
     await fetch(`${BASE_URL}/cart.json`, {
       method: 'PATCH',
