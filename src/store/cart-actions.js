@@ -9,29 +9,26 @@ export const getCartData = createAsyncThunk(
 
     const fetchData = async () => {
       const response = await fetch(`${BASE_URL}/cart.json`);
-      if (!response.ok) {
-        throw new Error('Error');
-      }
       const responseData = await response.json();
+
+      if (!responseData) return;
+
+      const userId = user ? user.uid : 'default';
+
+      const buyProducts = responseData[userId]; // tutaj jakiś default dla usera np. z local storage
+
       const fetchCart = {
         item: [],
         totalPrice: 0,
         totalQuantity: 0,
       };
-      // eslint-disable-next-line no-restricted-syntax
-      for (const key in responseData.items) {
-        if (Object.hasOwn(responseData.items, key)) {
-          fetchCart.item.push({
-            itemId: key,
-            name: responseData.items[key].name,
-            description: responseData.items[key].description,
-            price: responseData.items[key].price,
-            quantity: responseData.items[key].quantity,
-          });
-        }
-      }
-      fetchCart.totalPrice = responseData.totalPrice;
-      fetchCart.totalQuantity = responseData.totalQuantity;
+
+      if (!buyProducts) return;
+
+      if (buyProducts.items) buyProducts.items.forEach((product) => fetchCart.item.push(product));
+      fetchCart.totalPrice = buyProducts.totalPrice;
+      fetchCart.totalQuantity = buyProducts.totalQuantity;
+
       dispatch(setCartState(fetchCart));
     };
     fetchData();
@@ -41,22 +38,22 @@ export const getCartData = createAsyncThunk(
 export const sendCartData = createAsyncThunk('cart/setCartData', async (_, { getState }) => {
   const { user } = getState().auth;
   const { items, totalQuantity, totalPrice } = getState().cart;
-  const sendRequest = async () => {
-    const response = await fetch(`${BASE_URL}/cart.json`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        items,
-        totalQuantity,
-        totalPrice: totalPrice > 0.01 ? totalPrice : 0,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error('Fail');
-    }
+  const userId = user ? user.uid : 'default';
+  const totalPriceFormatted = totalPrice.toFixed(2);
+
+  const newCart = {
+    [userId]: {
+      items,
+      totalQuantity,
+      totalPrice: totalPriceFormatted > 0.01 ? totalPriceFormatted : 0,
+    },
   };
-  try {
-    await sendRequest();
-  } catch (error) {
-    console.log(error);
-  }
+  const sendRequest = async () => {
+    await fetch(`${BASE_URL}/cart.json`, {
+      method: 'PATCH',
+      body: JSON.stringify(newCart),
+    });
+  };
+
+  await sendRequest();
 });

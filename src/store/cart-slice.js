@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import BASE_URL from '../variables/variables';
 
 export const cartSlice = createSlice({
   name: 'cart',

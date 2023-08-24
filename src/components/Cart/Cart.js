@@ -13,7 +13,7 @@ const Cart = ({ onClose }) => {
   const cartTotalQuantity = useSelector((state) => state.cart.totalQuantity);
   const [isCheckout, setIsCheckout] = useState(false);
 
-  const totalAmount = `${cartTotalPrice.toFixed(2)}`;
+  const totalAmount = `${(+cartTotalPrice).toFixed(2)}`;
   const hasItems = cartItemsState.length > 0;
   const orderHandler = () => {
     setIsCheckout(true);
