@@ -5,7 +5,7 @@ import BASE_URL from '../variables/variables';
 export const getCartData = createAsyncThunk(
   'cart/getCartData',
   async (_, { getState, dispatch }) => {
-    const { user } = getState().auth;
+    const { user, token } = getState().auth;
 
     const fetchData = async () => {
       const response = await fetch(`${BASE_URL}/cart.json`);
@@ -13,9 +13,8 @@ export const getCartData = createAsyncThunk(
 
       if (!responseData) return;
 
-      const userId = user ? user.uid : 'default';
-
-      const buyProducts = responseData[userId]; // tutaj jakiś default dla usera np. z local storage
+      const userId = user ? user.uid : token;
+      const buyProducts = responseData[userId];
 
       const fetchCart = {
         item: [],
@@ -31,15 +30,16 @@ export const getCartData = createAsyncThunk(
 
       dispatch(setCartState(fetchCart));
     };
-    fetchData();
+    await fetchData();
   },
 );
 
 export const sendCartData = createAsyncThunk('cart/setCartData', async (_, { getState }) => {
-  const { user } = getState().auth;
+  const { user, token } = getState().auth;
   const { items, totalQuantity, totalPrice } = getState().cart;
-  const userId = user ? user.uid : 'default';
-  const totalPriceFormatted = totalPrice.toFixed(2);
+  const userId = user ? user.uid : token;
+
+  const totalPriceFormatted = +totalPrice.toFixed(2);
 
   const newCart =
     items.length > 0
