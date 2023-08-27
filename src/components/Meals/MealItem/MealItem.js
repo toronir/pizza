@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { fbStorage } from '../../../firebase-config';
+import useImgUrl from '../../../hooks/useImgUrl';
 import MealItemForm from './MealItemForm';
 import { addItemCart } from '../../../store/cart-slice';
 import { sendCartData } from '../../../store/cart-actions';
 import { setToggleModal } from '../../../store/meals-slice';
 import LikeItem from '../../UI/LikeItem';
-import imgFood from '../../../assets/img/food.jpg';
 import {
   BottomDiv,
   MealContent,
@@ -19,28 +16,18 @@ import {
 } from './MealItem.style';
 
 const MealItem = ({ id, name, description, price, category = null, type = null }) => {
+  const imgUrl = useImgUrl(`${category}_${id}`);
+  const priceFormatted = `${+price.toFixed(2)}`;
+
   const dispatch = useDispatch();
-  const [imgUrl, setImgUrl] = useState(imgFood);
   const userId = useSelector((state) => state.auth.user);
+
   const openDetail = () => dispatch(setToggleModal(id));
+
   const addToCartHandler = (quantity) => {
     dispatch(addItemCart({ id, name, quantity, price: +price }));
     dispatch(sendCartData());
   };
-  const imgName = `${category}_${id}`;
-  const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
-
-  const getImgUrl = () => {
-    getDownloadURL(imageFolderRef)
-      .then((url) => setImgUrl(url))
-      .catch(() => setImgUrl(imgFood));
-  };
-  useEffect(() => {
-    getImgUrl();
-  }, []);
-
-  const priceToNumber = +price;
-  const priceFormatted = `${priceToNumber.toFixed(2)}`;
 
   const setShortDiscription = (itemDescription) => {
     if (description.length > 47) {

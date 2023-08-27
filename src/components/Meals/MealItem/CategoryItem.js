@@ -1,30 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getDownloadURL, ref } from 'firebase/storage';
+import useImgUrl from '../../../hooks/useImgUrl';
 import { setCategoryState } from '../../../store/meals-slice';
-import { fbStorage } from '../../../firebase-config';
-import imgFood from '../../../assets/img/food.jpg';
 import { MealContent, MealDecription, MealImg, MealItemStyled, MealTitle } from './MealItem.style';
 import NavLinkStyled from '../../Layout/FooterItem.style';
 
 const CategotyItem = ({ id, name, description }) => {
   const dispatch = useDispatch();
-  const [imgUrl, setImgUrl] = useState(imgFood);
   const mealsCategory = useSelector((state) => state.meals.category);
   const imgName = id.includes('m') ? `${mealsCategory}_${id}` : `category_${id}`;
+  const imgUrl = useImgUrl(imgName);
   const changeCategory = () => dispatch(setCategoryState(id));
-
-  const imageFolderRef = ref(fbStorage, `images/${imgName}.jpg`);
-
-  const getImgUrl = () =>
-    getDownloadURL(imageFolderRef)
-      .then((url) => setImgUrl(url))
-      .catch(() => setImgUrl(imgFood));
-
-  useEffect(() => {
-    getImgUrl();
-  }, []);
 
   return (
     <NavLinkStyled to="category">
