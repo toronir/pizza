@@ -20,7 +20,7 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
   const priceFormatted = `${+price.toFixed(2)}`;
 
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.user);
+  const { user } = useSelector((state) => state.auth);
 
   const openDetail = () => dispatch(setToggleModal(id));
 
@@ -40,7 +40,7 @@ const MealItem = ({ id, name, description, price, category = null, type = null }
 
   return (
     <MealItemStyled>
-      {!type && userId && (
+      {!type && user && (
         <LikeItem
           id={id}
           name={name}

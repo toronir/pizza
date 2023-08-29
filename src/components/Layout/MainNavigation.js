@@ -1,38 +1,20 @@
-import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
-import auth from '../../firebase-config';
-import { login, logout, selectUser } from '../../store/auth-slice';
-// import Button from '../UI/Button';
+import logoutUser from '../../utils/auth';
+import { setCurrentUser } from '../../store/auth-slice';
+
 import Logo from '../UI/Logo';
 import LogoMobile from '../UI/LogoMobile';
 import userIcon from '../../assets/img/icons/user.svg';
 import { List, ListItem, LoggedItems } from './MainNavigation.style';
 
 const MainNavigation = () => {
-  const currentUser = useSelector(selectUser);
+  const currentUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
-      if (userAuth)
-        dispatch(
-          login({
-            email: userAuth.email,
-            uid: userAuth.uid,
-          }),
-        );
-      else dispatch(logout());
-    });
-  }, [dispatch]);
-
-  const logoutUser = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleLogoutUser = () => {
+    logoutUser();
+    dispatch(setCurrentUser());
   };
 
   return (
@@ -56,7 +38,7 @@ const MainNavigation = () => {
               <NavLink to="/my-account">My account</NavLink>
             </li>
             <li>
-              <button onClick={logoutUser}>Sign Out</button>
+              <button onClick={handleLogoutUser}>Sign Out</button>
             </li>
           </ul>
         </LoggedItems>

@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { onAuthStateChanged } from 'firebase/auth';
+import auth from './firebase-config';
 
 import GlobalStyle from './theme/GlobalStyle';
 import theme from './theme/mainTheme';
@@ -11,7 +13,7 @@ import { getWhishlistData } from './store/whislist-actions';
 import { getMealsData } from './store/meals-actions';
 import { getCartData } from './store/cart-actions';
 import { setCookie, getCookie } from './utils/cookie';
-import { addUserToken } from './store/auth-slice';
+import { addUserToken, setCurrentUser } from './store/auth-slice';
 import createdToken from './utils/token';
 
 const App = () => {
@@ -38,6 +40,15 @@ const App = () => {
     };
     fetchData();
   }, [user, token, dispatch, mealsCategory, mealsTag]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      const userData = userAuth ? { email: userAuth.email, uid: userAuth.uid } : null;
+      dispatch(setCurrentUser(userData));
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
 
   return (
     <React.StrictMode>

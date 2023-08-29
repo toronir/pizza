@@ -6,7 +6,7 @@ import auth from '../../firebase-config';
 import Card from '../UI/Card';
 import Alert from '../UI/Alert';
 import Button from '../UI/Button';
-import { login } from '../../store/auth-slice';
+import { setCurrentUser } from '../../store/auth-slice';
 import FormStyled from './AuthenticationForm.style';
 
 const AuthenticationForm = () => {
@@ -25,14 +25,12 @@ const AuthenticationForm = () => {
     let message;
     try {
       e.preventDefault();
-      if (type) userAuth = await signInWithEmailAndPassword(auth, emailRegister, passwordRegister);
-      else userAuth = await createUserWithEmailAndPassword(auth, emailRegister, passwordRegister);
-      dispatch(
-        login({
-          email: userAuth.user.email,
-          uid: userAuth.user.uid,
-        }),
-      );
+      userAuth = type
+        ? await signInWithEmailAndPassword(auth, emailRegister, passwordRegister)
+        : await createUserWithEmailAndPassword(auth, emailRegister, passwordRegister);
+
+      const { email, uid } = userAuth.user;
+      dispatch(setCurrentUser({ email, uid }));
       return navigate('/my-account');
     } catch (err) {
       switch (err.code) {

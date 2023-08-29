@@ -1,11 +1,14 @@
 import { updateProfile, updatePassword } from 'firebase/auth';
+import { useSelector } from 'react-redux';
 import auth from '../../firebase-config';
 import MyAccountPage from '../../Pages/MyAccountPage';
 import Title from '../UI/Title';
 import Button from '../UI/Button';
 
 const UserProfile = () => {
-  const userEmail = (auth.currentUser && auth.currentUser.email) || null;
+  const currentUser = useSelector((state) => state.auth.user);
+  const currUserEmail = currentUser ? currentUser.email : null;
+
   const updateUserPassword = () => {
     updatePassword(auth.currentUser, 'Test1ab')
       .then(() => {
@@ -22,11 +25,11 @@ const UserProfile = () => {
     <MyAccountPage>
       <Title as="h1">Your Data</Title>
       <div>
-        {userEmail && (
+        {currUserEmail && (
           <div>
             <h5>Login Data: </h5>
             <p>
-              e-mail: <b>{userEmail}</b>
+              e-mail: <b>{currUserEmail}</b>
             </p>
             <p>
               password: <b>*****</b>
