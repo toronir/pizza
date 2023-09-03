@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
 import { SplideSlide } from '@splidejs/react-splide';
 import Meals from '../components/Meals/Meals';
 import Slider from '../components/Slider/Slider';
 import SlidePromo from '../components/Slider/SlidePromo';
-import Detail from '../components/Detail/Detail';
 import Title from '../components/UI/Title';
 import MealsSummary from '../components/Meals/MealsSummary';
 import Image1 from '../assets/img/promo_slider_main/promobanner_1.png';
@@ -14,11 +12,8 @@ import Image5 from '../assets/img/promo_slider_main/promobanner_5.png';
 import CategotyItem from '../components/Meals/MealItem/CategoryItem';
 
 const HomePage = () => {
-  const detailModal = useSelector((state) => state.meals.detailModal);
-
   return (
     <>
-      {detailModal.isModalOpen && <Detail />}
       <section>
         <Slider
           options={{

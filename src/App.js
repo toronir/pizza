@@ -8,7 +8,7 @@ import auth from './firebase-config';
 import GlobalStyle from './theme/GlobalStyle';
 import theme from './theme/mainTheme';
 import router from './router/router';
-
+import Detail from './components/Detail/Detail';
 import { getWhishlistData } from './store/whislist-actions';
 import { getMealsData } from './store/meals-actions';
 import { getCartData } from './store/cart-actions';
@@ -18,6 +18,7 @@ import createdToken from './utils/token';
 
 const App = () => {
   const dispatch = useDispatch();
+  const detailModal = useSelector((state) => state.meals.detailModal);
   const { user, token } = useSelector((state) => state.auth);
   const mealsCategory = useSelector((state) => state.meals.category);
   const mealsTag = useSelector((state) => state.meals.tag);
@@ -52,6 +53,7 @@ const App = () => {
 
   return (
     <React.StrictMode>
+      {detailModal.isModalOpen && <Detail />}
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
